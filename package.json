@@ -6,6 +6,9 @@
   "description": "Personal blog and portfolio website for Truls, a software engineer based in Oslo, Norway",
   "author": "Truls",
   "homepage": "https://trulsbv.github.io",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

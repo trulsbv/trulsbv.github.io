@@ -11,4 +11,13 @@ export default defineConfig({
     include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     exclude: ["node_modules", "tests/e2e/**", "**/*.spec.ts"],
   },
+  optimizeDeps: {
+    exclude: ["@playwright/test"],
+  },
+  server: {
+    port: 5173,
+  },
+  preview: {
+    port: 5173,
+  },
 });
