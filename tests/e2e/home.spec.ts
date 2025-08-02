@@ -9,8 +9,12 @@ test.describe("Home Page", () => {
 
     // Check that the main content sections are present
     await expect(page.getByText("Hello, I'm")).toBeVisible();
-    await expect(page.getByText("Truls")).toBeVisible();
-    await expect(page.getByText("Software Engineer")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Truls", level: 1 })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Software Engineer", level: 3 })
+    ).toBeVisible();
 
     // Check navigation links
     await expect(page.getByRole("link", { name: "Home" })).toBeVisible();

@@ -1,14 +1,19 @@
 import { describe, it, expect, vi } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import { ROUTES } from "../types";
-import { useTypedNavigate, useTypedLocation, createTypedLink } from "../hooks";
 
-// Mock the hooks for testing
-vi.mock("../hooks", () => ({
-  useTypedNavigate: vi.fn(),
-  useTypedLocation: vi.fn(),
-  createTypedLink: vi.fn(),
-}));
+// Use partial mocking to preserve createTypedLink while mocking hooks
+vi.mock("../hooks", async (importOriginal) => {
+  const actual = (await importOriginal()) as any;
+  return {
+    ...actual,
+    useTypedNavigate: vi.fn(),
+    useTypedLocation: vi.fn(),
+  };
+});
+
+// Import after mocking
+import { useTypedNavigate, useTypedLocation, createTypedLink } from "../hooks";
 
 describe("Routing System", () => {
   describe("Route Constants", () => {
