@@ -10,6 +10,7 @@ const HeaderContainer = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
+  margin-top: 0;
 `;
 
 const Nav = styled.nav`
