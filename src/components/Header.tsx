@@ -17,7 +17,7 @@ const Nav = styled.nav`
   margin: 0 auto;
   padding: 1rem 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -34,11 +34,54 @@ const Logo = styled(Link)`
   }
 `;
 
+const NavLinks = styled.ul`
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+`;
+
+const NavLink = styled.a`
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
+`;
+
 const Header = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      // Update URL hash
+      window.history.pushState(null, "", `#${sectionId}`);
+    }
+  };
+
   return (
     <HeaderContainer>
       <Nav>
         <Logo to={ROUTES.HOME}>Truls Experiments</Logo>
+        <NavLinks>
+          <li>
+            <NavLink onClick={() => scrollToSection("welcome")}>
+              Welcome
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              onClick={() => scrollToSection("technical-implementations")}
+            >
+              Implementations
+            </NavLink>
+          </li>
+        </NavLinks>
       </Nav>
     </HeaderContainer>
   );

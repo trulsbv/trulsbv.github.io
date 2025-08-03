@@ -8,6 +8,7 @@ const HeroSection = styled.section`
   text-align: center;
   color: white;
   padding: 4rem 0;
+  scroll-margin-top: 80px; /* Account for fixed header */
 `;
 
 const HeroContent = styled.div`
@@ -22,6 +23,12 @@ const Greeting = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 `;
 
 const Description = styled.p`
@@ -35,10 +42,14 @@ const Description = styled.p`
 `;
 
 const Hero = () => {
+  const scrollToSection = () => {
+    window.history.pushState(null, "", "#welcome");
+  };
+
   return (
-    <HeroSection>
+    <HeroSection id="welcome">
       <HeroContent>
-        <Greeting>Welcome</Greeting>
+        <Greeting onClick={scrollToSection}>Welcome</Greeting>
         <Description>
           These are the components I have created while exploring new technical
           implementations.
