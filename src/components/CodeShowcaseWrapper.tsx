@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { ReactNode, useState, useRef } from "react";
+import { useRef } from "react";
+import type { ReactNode } from "react";
 
 const WrapperContainer = styled.div`
   background: rgba(255, 255, 255, 0.1);
