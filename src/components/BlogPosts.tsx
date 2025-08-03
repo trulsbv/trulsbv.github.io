@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ROUTES } from "../routes/types";
+import { TypedLink } from "./TypedLink";
 
 const BlogSection = styled.section`
   padding: 4rem 0;
@@ -96,6 +97,43 @@ const EmptyStateText = styled.p`
   line-height: 1.6;
 `;
 
+const CategoriesSection = styled.div`
+  margin-bottom: 3rem;
+  text-align: center;
+`;
+
+const CategoriesTitle = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: white;
+`;
+
+const CategoriesGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+`;
+
+const CategoryLink = styled(TypedLink)`
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    color: white;
+  }
+`;
+
 // Mock blog posts data
 const mockPosts = [
   {
@@ -128,9 +166,29 @@ const mockPosts = [
 ];
 
 const BlogPosts = () => {
+  // Extract unique categories from tags
+  const allTags = mockPosts.flatMap((post) => post.tags);
+  const categories = [...new Set(allTags)];
+
   return (
     <BlogSection>
       <SectionTitle>Latest Posts</SectionTitle>
+
+      <CategoriesSection>
+        <CategoriesTitle>Browse by Category</CategoriesTitle>
+        <CategoriesGrid>
+          {categories.map((category) => (
+            <CategoryLink
+              key={category}
+              to={ROUTES.BLOG_CATEGORY}
+              params={{ category: category.toLowerCase() }}
+            >
+              {category}
+            </CategoryLink>
+          ))}
+        </CategoriesGrid>
+      </CategoriesSection>
+
       {mockPosts.length > 0 ? (
         <PostsGrid>
           {mockPosts.map((post) => (

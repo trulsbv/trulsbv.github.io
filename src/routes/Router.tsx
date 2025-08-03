@@ -1,13 +1,25 @@
 import { Routes, Route } from "react-router-dom";
 import { routeConfig } from "./config";
 import { ROUTES } from "./types";
+import BlogCategoryContent from "../components/BlogCategoryContent";
 
 const AppRouter = () => {
   return (
     <Routes>
-      {routeConfig.map(({ path, component: Component }) => (
-        <Route key={path} path={path} element={<Component />} />
-      ))}
+      {routeConfig.map(({ path, component: Component }) => {
+        // Handle nested routes
+        if (path === ROUTES.BLOG) {
+          return (
+            <Route key={path} path={path} element={<Component />}>
+              <Route
+                path="category/:category"
+                element={<BlogCategoryContent />}
+              />
+            </Route>
+          );
+        }
+        return <Route key={path} path={path} element={<Component />} />;
+      })}
 
       {/* Catch-all route for 404 */}
       <Route

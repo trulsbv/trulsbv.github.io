@@ -4,6 +4,7 @@ export const ROUTES = {
   ABOUT: "/about",
   BLOG: "/blog",
   BLOG_POST: "/blog/:slug",
+  BLOG_CATEGORY: "/blog/category/:category",
   CONTACT: "/contact",
 } as const;
 
@@ -12,9 +13,14 @@ export interface BlogPostParams {
   slug: string;
 }
 
+export interface BlogCategoryParams {
+  category: string;
+}
+
 // Route parameter mapping
 export interface RouteParams {
   [ROUTES.BLOG_POST]: BlogPostParams;
+  [ROUTES.BLOG_CATEGORY]: BlogCategoryParams;
 }
 
 // Route path type
