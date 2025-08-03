@@ -213,7 +213,7 @@ The routing system integrates with:
 - **React Router**: For actual routing functionality
 - **Styled Components**: For styled navigation components
 - **TypeScript**: For type safety throughout
-- **Testing**: Vitest and React Testing Library for comprehensive testing
+- **Testing**: Playwright and React Testing Library for comprehensive testing
 
 ## 🚀 Best Practices
 

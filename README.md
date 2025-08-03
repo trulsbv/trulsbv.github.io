@@ -7,7 +7,7 @@ Welcome to my personal blog and portfolio website! I'm Truls, a 24-year-old soft
 - **Modern Tech Stack**: Built with React, TypeScript, and Vite
 - **Beautiful UI**: Styled with styled-components and modern design principles
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **Testing**: Comprehensive testing with Vitest, Playwright, and Storybook
+- **Testing**: Comprehensive testing with Playwright and Storybook
 - **Performance**: Optimized for fast loading and smooth interactions
 
 ## 🛠️ Tech Stack
@@ -15,7 +15,7 @@ Welcome to my personal blog and portfolio website! I'm Truls, a 24-year-old soft
 - **Frontend**: React 19, TypeScript, Vite
 - **Styling**: Styled Components
 - **Testing**:
-  - Unit Tests: Vitest + React Testing Library
+  - Unit Tests: React Testing Library (when needed)
   - E2E Tests: Playwright
   - Component Testing: Storybook
 - **Deployment**: GitHub Pages
