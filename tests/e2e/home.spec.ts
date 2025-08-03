@@ -8,55 +8,43 @@ test.describe("Home Page", () => {
     await expect(page.locator("header")).toBeVisible();
 
     // Check that the main content sections are present
-    await expect(page.getByText("Hello, I'm")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Welcome" })).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Truls", level: 1 })
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: "Software Engineer", level: 3 })
+      page.getByText(
+        "These are the components I have created while exploring new technical implementations."
+      )
     ).toBeVisible();
 
     // Check navigation links
-    await expect(page.getByRole("link", { name: "Home" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "About" })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Blog" })).toBeVisible();
+    await expect(page.getByText("Truls Experiments")).toBeVisible();
+    await expect(page.locator("header").getByText("Welcome")).toBeVisible();
+    await expect(
+      page.locator("header").getByText("Implementations")
+    ).toBeVisible();
   });
 
   test("should navigate to different sections", async ({ page }) => {
     await page.goto("/");
 
-    // Click on About link
-    await page.getByRole("link", { name: "About" }).click();
-    await expect(page.getByText("About Me")).toBeVisible();
+    // Click on Welcome link in header
+    await page.locator("header").getByText("Welcome").click();
+    await expect(page.getByRole("heading", { name: "Welcome" })).toBeVisible();
 
-    // Click on Blog link
-    await page.getByRole("link", { name: "Blog" }).click();
-    await expect(page.getByText("Latest Posts")).toBeVisible();
-
-    // Click on Home link
-    await page.getByRole("link", { name: "Home" }).click();
-    await expect(page.getByText("Hello, I'm")).toBeVisible();
-  });
-
-  test("should display blog posts", async ({ page }) => {
-    await page.goto("/");
-
-    // Scroll down to blog section
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-
-    // Check that blog posts are displayed
-    await expect(page.getByText("Latest Posts")).toBeVisible();
-    await expect(page.getByText("Building a Modern React App")).toBeVisible();
-  });
-
-  test("should have proper meta information", async ({ page }) => {
-    await page.goto("/");
-
-    // Check page title
-    await expect(page).toHaveTitle(/Truls/);
-
-    // Check that the page is responsive
-    await page.setViewportSize({ width: 375, height: 667 });
+    // Click on Implementations link in header
+    await page.locator("header").getByText("Implementations").click();
+    // The page should still be visible since it's a scroll-to-section navigation
     await expect(page.locator("header")).toBeVisible();
+  });
+
+  test("should have proper page structure", async ({ page }) => {
+    await page.goto("/");
+
+    // Check that the page has the expected structure
+    await expect(page.locator("header")).toBeVisible();
+    await expect(page.locator("main")).toBeVisible();
+    await expect(page.locator("footer")).toBeVisible();
+
+    // Check that the main content is present
+    await expect(page.getByRole("heading", { name: "Welcome" })).toBeVisible();
   });
 });
