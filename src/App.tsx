@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { BrowserRouter } from "react-router-dom";
-import AIBanner from "./components/AIBanner";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AppRouter from "./routes/Router";
@@ -22,7 +21,6 @@ function App() {
   return (
     <BrowserRouter>
       <AppContainer>
-        <AIBanner />
         <Header />
         <MainContent>
           <AppRouter />

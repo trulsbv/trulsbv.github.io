@@ -138,30 +138,30 @@ const CategoryLink = styled(TypedLink)`
 const mockPosts = [
   {
     id: 1,
-    slug: "building-modern-react-app",
-    title: "Building a Modern React App with Vite and TypeScript",
+    slug: "experimenting-with-react-server-components",
+    title: "Experimenting with React Server Components",
     excerpt:
-      "A deep dive into setting up a production-ready React application with Vite, TypeScript, and modern tooling for optimal developer experience.",
+      "My first attempt at implementing RSC in a real project. What worked, what didn't, and the unexpected challenges I encountered along the way.",
     date: "2024-01-15",
-    tags: ["React", "TypeScript", "Vite", "Frontend"],
+    tags: ["React", "Server Components", "Experiments", "Learning"],
   },
   {
     id: 2,
-    slug: "styled-components-power",
-    title: "The Power of Styled Components in React",
+    slug: "building-ai-powered-ui-components",
+    title: "Building AI-Powered UI Components from Scratch",
     excerpt:
-      "Exploring how styled-components can revolutionize your CSS-in-JS approach and improve component reusability in React applications.",
+      "A deep dive into creating interactive components that leverage LLM APIs. From concept to implementation, including the failures and breakthroughs.",
     date: "2024-01-10",
-    tags: ["React", "Styled Components", "CSS", "Frontend"],
+    tags: ["AI", "UI Components", "LLM", "Experiments"],
   },
   {
     id: 3,
-    slug: "e2e-testing-playwright",
-    title: "End-to-End Testing with Playwright",
+    slug: "web-components-vs-react",
+    title: "Web Components vs React: A Performance Experiment",
     excerpt:
-      "Why Playwright is becoming the go-to choice for E2E testing and how to implement it effectively in your development workflow.",
+      "Comparing bundle sizes, runtime performance, and developer experience between native Web Components and React. Surprising results inside.",
     date: "2024-01-05",
-    tags: ["Testing", "Playwright", "E2E", "Quality Assurance"],
+    tags: ["Web Components", "React", "Performance", "Comparison"],
   },
 ];
 
@@ -172,7 +172,7 @@ const BlogPosts = () => {
 
   return (
     <BlogSection>
-      <SectionTitle>Latest Posts</SectionTitle>
+      <SectionTitle>Learning Experiments</SectionTitle>
 
       <CategoriesSection>
         <CategoriesTitle>Browse by Category</CategoriesTitle>
@@ -215,11 +215,11 @@ const BlogPosts = () => {
         </PostsGrid>
       ) : (
         <EmptyState>
-          <EmptyStateTitle>Coming Soon</EmptyStateTitle>
-          <EmptyStateText>
-            I'm working on some interesting content. Check back soon for my
-            first blog post!
-          </EmptyStateText>
+                  <EmptyStateTitle>Experiments in Progress</EmptyStateTitle>
+        <EmptyStateText>
+          I'm currently setting up my first technical experiments. Check back soon to see 
+          what I'm learning and building!
+        </EmptyStateText>
         </EmptyState>
       )}
     </BlogSection>

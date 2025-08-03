@@ -1,13 +1,11 @@
 import Hero from "../components/Hero";
-import About from "../components/About";
-import BlogPosts from "../components/BlogPosts";
+import ComponentShowcase from "../components/ComponentShowcase";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
-      <About />
-      <BlogPosts />
+      <ComponentShowcase />
     </>
   );
 };

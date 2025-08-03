@@ -81,70 +81,69 @@ const SkillItem = styled.li`
 const About = () => {
   return (
     <AboutSection>
-      <SectionTitle>About Me</SectionTitle>
+      <SectionTitle>What I'm Exploring</SectionTitle>
       <AboutContent>
         <AboutText>
           <p>
-            I'm a 24-year-old software engineer passionate about creating
-            meaningful digital experiences. With a strong foundation in modern
-            web technologies, I enjoy solving complex problems and building
-            applications that users love.
+            I'm a 24-year-old developer who believes the best way to grow is through 
+            continuous experimentation. This site serves as my digital lab where I 
+            test new technologies, document my learning process, and share the insights 
+            I gain along the way.
           </p>
           <br />
           <p>
-            When I'm not coding, you can find me exploring the beautiful nature
-            around Oslo, reading about new technologies, or contributing to
-            open-source projects. I believe in continuous learning and staying
-            up-to-date with the latest industry trends.
+            Instead of showcasing polished portfolio pieces, you'll find honest accounts 
+            of my experiments with emerging tools, frameworks, and architectural patterns. 
+            Some will succeed, some will fail, but all will teach valuable lessons.
           </p>
           <br />
           <p>
-            I'm always interested in new opportunities and collaborations.
-            Whether you want to discuss a project, share ideas, or just say
-            hello, feel free to reach out!
+            I'm particularly interested in exploring AI integration, modern frontend 
+            architectures, and the intersection of performance and developer experience. 
+            Join me as I navigate the ever-evolving landscape of software development.
           </p>
         </AboutText>
 
         <SkillsSection>
-          <SkillsTitle>Skills & Technologies</SkillsTitle>
+          <SkillsTitle>Current Learning Focus</SkillsTitle>
           <SkillsGrid>
             <SkillCategory>
-              <CategoryTitle>Frontend</CategoryTitle>
+              <CategoryTitle>Frontend Experiments</CategoryTitle>
               <SkillList>
-                <SkillItem>React & TypeScript</SkillItem>
-                <SkillItem>Next.js</SkillItem>
-                <SkillItem>Styled Components</SkillItem>
-                <SkillItem>Tailwind CSS</SkillItem>
+                <SkillItem>React Server Components</SkillItem>
+                <SkillItem>Web Components</SkillItem>
+                <SkillItem>CSS Container Queries</SkillItem>
+                <SkillItem>View Transitions API</SkillItem>
               </SkillList>
             </SkillCategory>
 
             <SkillCategory>
-              <CategoryTitle>Backend</CategoryTitle>
+              <CategoryTitle>AI & ML Integration</CategoryTitle>
               <SkillList>
-                <SkillItem>Node.js</SkillItem>
-                <SkillItem>Express</SkillItem>
-                <SkillItem>PostgreSQL</SkillItem>
-                <SkillItem>MongoDB</SkillItem>
+                <SkillItem>LLM APIs & RAG</SkillItem>
+                <SkillItem>Vector Databases</SkillItem>
+                <SkillItem>AI-Powered UIs</SkillItem>
+                <SkillItem>Prompt Engineering</SkillItem>
               </SkillList>
             </SkillCategory>
 
             <SkillCategory>
-              <CategoryTitle>Tools</CategoryTitle>
+              <CategoryTitle>Performance & DX</CategoryTitle>
               <SkillList>
-                <SkillItem>Git & GitHub</SkillItem>
-                <SkillItem>Docker</SkillItem>
-                <SkillItem>CI/CD</SkillItem>
-                <SkillItem>AWS</SkillItem>
+                <SkillItem>Build Tool Optimization</SkillItem>
+                <SkillItem>Bundle Analysis</SkillItem>
+                <SkillItem>Developer Tooling</SkillItem>
+                <SkillItem>Testing Strategies</SkillItem>
               </SkillList>
             </SkillCategory>
 
             <SkillCategory>
-              <CategoryTitle>Testing</CategoryTitle>
+              <CategoryTitle>Emerging Tech</CategoryTitle>
               <SkillList>
-                <SkillItem>Jest</SkillItem>
-                <SkillItem>Playwright</SkillItem>
-                <SkillItem>React Testing Library</SkillItem>
-                <SkillItem>Storybook</SkillItem>
+                <SkillItem>WebAssembly</SkillItem>
+                <SkillItem>Edge Computing</SkillItem>
+                <SkillItem>Progressive Web Apps</SkillItem>
+                <SkillItem>Web APIs</SkillItem>
               </SkillList>
             </SkillCategory>
           </SkillsGrid>
