@@ -1,13 +1,22 @@
-import { Route, Routes } from "react-router-dom";
-import { routeConfig } from "./config";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { ROUTES } from "./types";
+import BaseLayout from "../components/BaseLayout";
+import HomePage from "../pages/HomePage";
+import ComponentsPage from "../pages/ComponentsPage";
+import ComponentDetailPage from "../pages/ComponentDetailPage";
 
 const AppRouter = () => {
   return (
     <Routes>
-      {routeConfig.map(({ path, component: Component }) => {
-        return <Route key={path} path={path} element={<Component />} />;
-      })}
+      <Route path={ROUTES.BASE} element={<BaseLayout />}>
+        <Route index element={<Navigate to={ROUTES.HOME} replace />} />
+        <Route path="home" element={<HomePage />} />
+        <Route path="components" element={<ComponentsPage />} />
+        <Route
+          path="components/:componentName"
+          element={<ComponentDetailPage />}
+        />
+      </Route>
 
       {/* Catch-all route for 404 */}
       <Route

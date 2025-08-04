@@ -1,6 +1,7 @@
 // Route path definitions
 export const ROUTES = {
-  HOME: "/",
+  BASE: "/",
+  HOME: "/home",
   COMPONENTS: "/components",
   COMPONENT_DETAIL: "/components/:componentName",
 } as const;
