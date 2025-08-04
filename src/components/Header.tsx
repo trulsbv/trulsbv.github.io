@@ -74,13 +74,6 @@ const Header = () => {
               Welcome
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              onClick={() => scrollToSection("technical-implementations")}
-            >
-              Implementations
-            </NavLink>
-          </li>
         </NavLinks>
       </Nav>
     </HeaderContainer>

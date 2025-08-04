@@ -5,6 +5,10 @@
 - [ ] Update the README
 - [ ] Add instructions on how AI should develop in the repo
 - [ ] Review and rework the current page
+- [ ] Fix the web-icon of the page
+- [ ] Rewrite all the components and delete the unused ones
+- [ ] Remove test-setup.ts and other redundant library items
+- [ ] Go over the route tree. Each post should have its own route where I can provide a deeper explanation into why I do what I do
 
 ## Notes
 

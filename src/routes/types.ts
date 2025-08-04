@@ -1,26 +1,18 @@
 // Route path definitions
 export const ROUTES = {
   HOME: "/",
-  ABOUT: "/about",
-  BLOG: "/blog",
-  BLOG_POST: "/blog/:slug",
-  BLOG_CATEGORY: "/blog/category/:category",
-  CONTACT: "/contact",
+  COMPONENTS: "/components",
+  COMPONENT_DETAIL: "/components/:componentName",
 } as const;
 
 // Route parameter types
-export interface BlogPostParams {
-  slug: string;
-}
-
-export interface BlogCategoryParams {
-  category: string;
+export interface ComponentDetailParams {
+  componentName: string;
 }
 
 // Route parameter mapping
 export interface RouteParams {
-  [ROUTES.BLOG_POST]: BlogPostParams;
-  [ROUTES.BLOG_CATEGORY]: BlogCategoryParams;
+  [ROUTES.COMPONENT_DETAIL]: ComponentDetailParams;
 }
 
 // Route path type
@@ -35,13 +27,4 @@ export type TypedRoute<T extends RoutePath> = T extends keyof RouteParams
 export interface RouteConfig {
   path: RoutePath;
   component: React.ComponentType;
-  title: string;
-  description?: string;
-}
-
-// Navigation item type
-export interface NavItem {
-  label: string;
-  path: RoutePath;
-  isActive?: boolean;
 }
