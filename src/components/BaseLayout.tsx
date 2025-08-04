@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -16,16 +16,12 @@ const MainContent = styled.main`
   padding: 0 20px;
 `;
 
-const BaseLayout = () => {
-  return (
-    <AppContainer>
-      <Header />
-      <MainContent>
-        <Outlet />
-      </MainContent>
-      <Footer />
-    </AppContainer>
-  );
-};
-
-export default BaseLayout; 
+export const BaseLayout = () => (
+  <AppContainer>
+    <Header />
+    <MainContent>
+      <Outlet />
+    </MainContent>
+    <Footer />
+  </AppContainer>
+);

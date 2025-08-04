@@ -42,42 +42,16 @@ const NavLinks = styled.ul`
   gap: 2rem;
 `;
 
-const NavLink = styled.a`
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  font-weight: 400;
-  transition: color 0.3s ease;
-  text-decoration: none;
-
-  &:hover {
-    color: white;
-  }
-`;
-
-const Header = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      // Update URL hash
-      window.history.pushState(null, "", `#${sectionId}`);
-    }
-  };
-
-  return (
-    <HeaderContainer>
-      <Nav>
-        <Logo to={ROUTES.HOME}>Truls Experiments</Logo>
-        <NavLinks>
-          <li>
-            <NavLink onClick={() => scrollToSection("welcome")}>
-              Welcome
-            </NavLink>
-          </li>
-        </NavLinks>
-      </Nav>
-    </HeaderContainer>
-  );
-};
-
-export default Header;
+export const Header = () => (
+  <HeaderContainer>
+    <Nav>
+      <Logo to={ROUTES.HOME}>Truls Experiments</Logo>
+      <NavLinks>
+        <li>
+          <Link to={ROUTES.HOME}>Home</Link>
+          <Link to={ROUTES.COMPONENTS}>Components</Link>
+        </li>
+      </NavLinks>
+    </Nav>
+  </HeaderContainer>
+);

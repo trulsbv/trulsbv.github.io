@@ -15,15 +15,11 @@ const Copyright = styled.div`
   font-size: 0.9rem;
 `;
 
-const Footer = () => {
-  return (
-    <FooterContainer>
-      <Copyright>
-        © {new Date().getFullYear()} Truls. Technical experiments and
-        implementations.
-      </Copyright>
-    </FooterContainer>
-  );
-};
-
-export default Footer;
+export const Footer = () => (
+  <FooterContainer>
+    <Copyright>
+      © {new Date().getFullYear()} Truls. Technical experiments and
+      implementations.
+    </Copyright>
+  </FooterContainer>
+);
