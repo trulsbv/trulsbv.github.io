@@ -1,9 +1,13 @@
-import type { Location } from "react-router-dom";
-
 export type ComponentDetailPageViewProps = {
-  location: Location;
+  name: string;
+  content: string;
 };
 
 export const ComponentDetailPageView = (
   props: ComponentDetailPageViewProps
-) => <>Example detail {JSON.stringify(props)}</>;
+) => (
+  <>
+    <h1>{props.name}</h1>
+    <pre>{props.content}</pre>
+  </>
+);
