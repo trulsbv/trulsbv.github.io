@@ -1,21 +1,14 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ROUTES } from "./types";
 import { BaseLayout } from "../components/BaseLayout";
-import { HomePage } from "../pages/home/HomePage";
-import { ComponentsPage } from "../pages/components/ComponentsPage";
-import { ComponentDetailPage } from "../pages/components/detail/ComponentDetailPage";
+import { routeSubtrees } from "./routeSubtrees";
 
 const AppRouter = () => {
   return (
     <Routes>
       <Route path={ROUTES.BASE} element={<BaseLayout />}>
         <Route index element={<Navigate to={ROUTES.HOME} replace />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="components" element={<ComponentsPage />} />
-        <Route
-          path="components/:componentName"
-          element={<ComponentDetailPage />}
-        />
+        {routeSubtrees}
       </Route>
 
       {/* Catch-all route for 404 */}
