@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import { ComponentsGrid } from "../../components/ComponentsGrid";
+import { ComponentsIndex } from "../../components/ComponentsIndex";
 
 export const ComponentsPage = () => {
   return (
     <>
-      <ComponentsGrid />
+      <ComponentsIndex />
       <Outlet />
     </>
   );
