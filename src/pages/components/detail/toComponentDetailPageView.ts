@@ -16,14 +16,24 @@ const extractComponentName = (pathname: string): string => {
   return displayName;
 };
 
+// Copy to clipboard functionality
+const copyToClipboard = async (text: string): Promise<void> => {
+  await navigator.clipboard.writeText(text);
+};
+
 export const toComponentDetailPageViewProps = ({
   location,
 }: {
   location: Location;
 }): ComponentDetailPageViewProps => {
   const name = extractComponentName(location.pathname);
+  const content = getComponentContent(name) ?? "";
+
   return {
     name,
-    content: getComponentContent(name) ?? "",
+    code: {
+      content,
+      onCopy: () => copyToClipboard(content),
+    },
   };
 };
