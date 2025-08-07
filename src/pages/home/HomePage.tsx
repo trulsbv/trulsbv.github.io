@@ -1,9 +1,9 @@
 import Hero from "../../components/Hero";
-import { ModalExample } from "../../components/ModalExample";
+import { ComponentsGrid } from "../../components/ComponentsGrid";
 
 export const HomePage = () => (
   <>
     <Hero />
-    <ModalExample />
+    <ComponentsGrid />
   </>
 );
