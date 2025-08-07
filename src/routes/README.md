@@ -1,5 +1,5 @@
 # Routing Structure
-
+The router is created programmatically in `Router.tsx` and consumed by `App.tsx`.
 This project uses a hierarchical routing structure where routing logic is organized by feature/page sections.
 
 ## Structure
