@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { semantic } from "../theme/tokens";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(180deg, ${semantic.layout.backgroundStart} 0%, ${semantic.layout.backgroundEnd} 100%);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     sans-serif;
 `;

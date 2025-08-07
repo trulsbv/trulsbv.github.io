@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { semantic } from "../theme/tokens";
 import { ComponentCard } from "./ComponentCard";
 
 const Grid = styled.div`
@@ -19,7 +20,7 @@ const SectionTitle = styled.h2`
   margin-bottom: 2rem;
   font-size: 1.875rem;
   font-weight: 700;
-  color: #111827;
+  color: ${semantic.hero.foreground};
 `;
 
 const components = [

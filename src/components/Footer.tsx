@@ -1,17 +1,18 @@
 import styled from "styled-components";
+import { semantic } from "../theme/tokens";
 
 const FooterContainer = styled.footer`
-  background: rgba(0, 0, 0, 0.3);
+  background: ${semantic.footer.background};
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid ${semantic.footer.border};
   padding: 2rem 0;
   margin-top: 4rem;
+  box-shadow: ${semantic.footer.shadow};
 `;
 
 const Copyright = styled.div`
   text-align: center;
-  color: white;
-  opacity: 0.6;
+  color: ${semantic.footer.textMuted};
   font-size: 0.9rem;
 `;
 

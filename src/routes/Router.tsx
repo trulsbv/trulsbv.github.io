@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ROUTES } from "./types";
+import { semantic } from "../theme/tokens";
 import { BaseLayout } from "../components/BaseLayout";
 import { routeSubtrees } from "./routeSubtrees";
 
@@ -17,7 +18,7 @@ const AppRouter = () => {
         element={
           <div
             style={{
-              color: "white",
+              color: semantic.hero.foreground,
               textAlign: "center",
               padding: "4rem 2rem",
               minHeight: "100vh",
@@ -36,7 +37,7 @@ const AppRouter = () => {
             <a
               href={ROUTES.HOME}
               style={{
-                color: "white",
+                color: semantic.hero.title,
                 textDecoration: "underline",
                 fontSize: "1.1rem",
               }}

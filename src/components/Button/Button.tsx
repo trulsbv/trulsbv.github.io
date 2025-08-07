@@ -1,38 +1,39 @@
 import styled from "styled-components";
+import { semantic } from "../../theme/tokens";
 
 const PrimaryButtonStyle = `
-  background-color: #3b82f6;
-  color: white;
+  background-color: ${semantic.button.primaryBackground};
+  color: ${semantic.button.primaryText};
   
   &:hover {
-    background-color: #2563eb;
+    background-color: ${semantic.button.primaryHoverBackground};
   }
   
   &:disabled {
-    background-color: #93c5fd; /* lighter blue */
-    color: #ffffff;
+    background-color: ${semantic.button.primaryDisabledBackground};
+    color: ${semantic.button.primaryText};
   }
 
   &:disabled:hover {
-    background-color: #93c5fd;
+    background-color: ${semantic.button.primaryDisabledBackground};
   }
 `;
 
 const SecondaryButtonStyle = `
-  background-color: #f3f4f6;
-  color: #374151;
+  background-color: ${semantic.button.secondaryBackground};
+  color: ${semantic.button.secondaryText};
   
   &:hover {
-    background-color: #e5e7eb;
+    background-color: ${semantic.button.secondaryHoverBackground};
   }
   
   &:disabled {
-    background-color: #e5e7eb; /* keep subtle background */
-    color: #9ca3af; /* muted text */
+    background-color: ${semantic.button.secondaryDisabledBackground};
+    color: ${semantic.button.secondaryDisabledText};
   }
 
   &:disabled:hover {
-    background-color: #e5e7eb;
+    background-color: ${semantic.button.secondaryDisabledBackground};
   }
 `;
 
@@ -46,7 +47,7 @@ export const Button = styled.button<{ variant?: "primary" | "secondary" }>`
   transition: all 0.2s ease;
 
   &:focus {
-    outline: 2px solid #1d4ed8;
+    outline: 2px solid ${semantic.button.focusOutline};
     outline-offset: 2px;
   }
 
