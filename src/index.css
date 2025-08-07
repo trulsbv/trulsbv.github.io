@@ -95,7 +95,20 @@ code {
   word-break: break-word;
 }
 
-.code-content code {
+/* Override Prism.js theme to match our design */
+.code-content .token {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Ensure Prism.js doesn't override our background */
+.code-content pre[class*="language-"] {
+  background: #1e293b;
+  margin: 0;
+  padding: 0;
+}
+
+.code-content code[class*="language-"] {
   background: transparent;
   color: inherit;
   padding: 0;

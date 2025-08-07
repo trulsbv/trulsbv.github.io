@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Prism from "prismjs";
+import "prismjs/components/prism-typescript";
+import "prismjs/themes/prism-tomorrow.css";
 
 export type ComponentDetailPageViewProps = {
   name: string;
@@ -17,6 +20,10 @@ const CodeDisplay = ({
   };
 }) => {
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [code.content]);
 
   const handleCopy = async () => {
     await code.onCopy();
@@ -37,7 +44,7 @@ const CodeDisplay = ({
         </button>
       </div>
       <pre className="code-content">
-        <code>{code.content}</code>
+        <code className="language-typescript">{code.content}</code>
       </pre>
     </div>
   );
