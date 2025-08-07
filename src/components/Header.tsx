@@ -73,7 +73,7 @@ const StyledNavLink = styled(NavLink)`
 export const Header = () => (
   <HeaderContainer>
     <Nav>
-      <Logo to={ROUTES.HOME}>Truls Experiments</Logo>
+      <Logo to={ROUTES.HOME}>trulsbv.dev</Logo>
       <NavLinks>
         <li>
           <StyledNavLink to={ROUTES.HOME} end>
