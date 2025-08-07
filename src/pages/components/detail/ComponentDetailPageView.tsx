@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
-import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/themes/prism.css";
+import { semantic } from "../../../theme/tokens";
 
 export type ComponentDetailPageViewProps = {
   name: string;
@@ -20,6 +21,7 @@ const CodeDisplay = ({
   };
 }) => {
   const [copied, setCopied] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     Prism.highlightAll();
@@ -32,20 +34,33 @@ const CodeDisplay = ({
   };
 
   return (
-    <div className="code-display">
+    <div className="code-display" style={{ background: semantic.code.containerBackground, border: `1px solid ${semantic.code.border}` }}>
       <div className="code-header">
         <span className="code-title">Component Code</span>
-        <button
-          className={`copy-button ${copied ? "copied" : ""}`}
-          onClick={handleCopy}
-          aria-label="Copy code to clipboard"
-        >
-          {copied ? "Copied!" : "Copy"}
-        </button>
+        <div>
+          <button
+            className="copy-button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="component-code-content"
+          >
+            {open ? "Hide code" : "Show code"}
+          </button>
+          <button
+            className={`copy-button ${copied ? "copied" : ""}`}
+            onClick={handleCopy}
+            aria-label="Copy code to clipboard"
+            style={{ marginLeft: 8 }}
+          >
+            {copied ? "Copied!" : "Copy"}
+          </button>
+        </div>
       </div>
-      <pre className="code-content">
-        <code className="language-typescript">{code.content}</code>
-      </pre>
+      {open && (
+        <pre id="component-code-content" className="code-content" style={{ background: semantic.code.containerBackground, color: semantic.code.text }}>
+          <code className="language-typescript">{code.content}</code>
+        </pre>
+      )}
     </div>
   );
 };
