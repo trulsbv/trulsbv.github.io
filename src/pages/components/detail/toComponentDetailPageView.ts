@@ -1,7 +1,6 @@
 import type { Location } from "react-router-dom";
 import type { ComponentDetailPageViewProps } from "./ComponentDetailPageView";
 import { getComponentContent } from "./componentDictionary";
-import { getExampleComponent } from "./exampleDictionary";
 
 const toTitleCase = (str: string) => {
   return str.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
@@ -26,6 +25,5 @@ export const toComponentDetailPageViewProps = ({
   return {
     name,
     content: getComponentContent(name) ?? "",
-    ExampleComponent: getExampleComponent(name),
   };
 };

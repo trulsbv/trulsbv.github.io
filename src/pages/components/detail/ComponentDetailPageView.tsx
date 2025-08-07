@@ -1,21 +1,14 @@
-import type { ComponentType } from "react";
-
 export type ComponentDetailPageViewProps = {
   name: string;
   content: string;
-  ExampleComponent?: ComponentType | null;
 };
 
 export const ComponentDetailPageView = (
-  props: ComponentDetailPageViewProps
+  props: React.PropsWithChildren<ComponentDetailPageViewProps>
 ) => (
   <>
     <h1>{props.name}</h1>
+    {props.children}
     <pre>{props.content}</pre>
-    {props.ExampleComponent && (
-      <div style={{ marginTop: "40px" }}>
-        <props.ExampleComponent />
-      </div>
-    )}
   </>
 );
