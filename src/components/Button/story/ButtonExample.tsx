@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../../../../components/Button";
+import { Button } from "../Button";
 
 export const ButtonExample = () => {
   const [clickCount, setClickCount] = useState(0);

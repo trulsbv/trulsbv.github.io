@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "../../../../components/Button";
-import { CenteredContainer, Modal } from "../../../../components/Modal";
+import { Button } from "../../Button/Button";
+import { CenteredContainer, Modal } from "../Modal";
 
 export const ModalExample = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

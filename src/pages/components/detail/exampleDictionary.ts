@@ -1,10 +1,10 @@
 // Dynamic example component loader
-// This approach uses dynamic imports to load example components
+// This approach uses dynamic imports to load example components from co-located story folders
 
 import type { ComponentType } from "react";
 
-// Import all example components
-const exampleModules = import.meta.glob("./*.tsx", {
+// Import all example components from component story folders
+const exampleModules = import.meta.glob("../../../components/*/story/*.tsx", {
   eager: true,
 });
 
@@ -56,4 +56,4 @@ export const getAvailableExamples = (): string[] => {
 };
 
 // Type for the example dictionary
-export type ExampleDictionary = typeof exampleDictionary; 
+export type ExampleDictionary = typeof exampleDictionary;
