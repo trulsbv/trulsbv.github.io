@@ -7,6 +7,8 @@ import { RouteTitle } from "../routes/RouteTitle";
 
 const AppContainer = styled.div`
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(180deg, ${semantic.layout.backgroundStart} 0%, ${semantic.layout.backgroundEnd} 100%);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     sans-serif;
@@ -14,8 +16,8 @@ const AppContainer = styled.div`
 
 const MainContent = styled.main`
   max-width: 1200px;
-  margin: 0 auto;
   padding: 0 20px;
+  flex: 1;
 `;
 
 export const BaseLayout = () => (
