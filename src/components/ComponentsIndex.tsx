@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { semantic } from "../theme/tokens";
 import { getAvailableComponents } from "../pages/components/detail/componentDictionary";
 
@@ -46,7 +46,7 @@ const Grid = styled.div`
   gap: 0.5rem;
 `;
 
-const Chip = styled(Link)`
+const Chip = styled(NavLink)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -74,6 +74,12 @@ const Chip = styled(Link)`
   &:focus-visible {
     outline: 2px solid ${semantic.button.focusOutline};
     outline-offset: 2px;
+  }
+
+  &[aria-current="page"] {
+    background: #fff;
+    border-color: ${semantic.header.linkActiveBg};
+    box-shadow: inset 0 0 0 1px ${semantic.header.linkActiveBg};
   }
 `;
 
@@ -110,7 +116,7 @@ export const ComponentsIndex = () => {
       </HeaderRow>
       <Grid>
         {components.map(({ display, route }) => (
-          <Chip key={route} to={`/components/${route}`}>
+          <Chip key={route} to={`/components/${route}`} end>
             {display}
           </Chip>
         ))}
