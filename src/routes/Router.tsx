@@ -1,24 +1,21 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import { ROUTES } from "./types";
-import { semantic } from "../theme/tokens";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { BaseLayout } from "../components/BaseLayout";
+import { ROUTES } from "./types";
 import { routeSubtrees } from "./routeSubtrees";
 
-const AppRouter = () => {
-  return (
-    <Routes>
-      <Route path={ROUTES.BASE} element={<BaseLayout />}>
-        <Route index element={<Navigate to={ROUTES.HOME} replace />} />
-        {routeSubtrees}
-      </Route>
-
-      {/* Catch-all route for 404 */}
-      <Route
-        path="*"
-        element={
+export const router = createBrowserRouter([
+  {
+    path: ROUTES.BASE,
+    element: <BaseLayout />,
+    children: [
+      { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
+      ...routeSubtrees,
+      {
+        path: "*",
+        element: (
           <div
             style={{
-              color: semantic.hero.foreground,
+              color: "#111827",
               textAlign: "center",
               padding: "4rem 2rem",
               minHeight: "100vh",
@@ -29,15 +26,13 @@ const AppRouter = () => {
             }}
           >
             <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>404</h1>
-            <p
-              style={{ fontSize: "1.2rem", marginBottom: "2rem", opacity: 0.8 }}
-            >
+            <p style={{ fontSize: "1.2rem", marginBottom: "2rem", opacity: 0.8 }}>
               Page not found
             </p>
             <a
               href={ROUTES.HOME}
               style={{
-                color: semantic.hero.title,
+                color: "#0F172A",
                 textDecoration: "underline",
                 fontSize: "1.1rem",
               }}
@@ -45,10 +40,8 @@ const AppRouter = () => {
               Return to home
             </a>
           </div>
-        }
-      />
-    </Routes>
-  );
-};
-
-export default AppRouter;
+        ),
+      },
+    ],
+  },
+]);

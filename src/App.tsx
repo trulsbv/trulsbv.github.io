@@ -1,6 +1,6 @@
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { useEffect } from "react";
-import AppRouter from "./routes/Router";
+import { router } from "./routes/Router";
 
 function App() {
   useEffect(() => {
@@ -30,9 +30,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    <RouterProvider router={router} />
   );
 }
 
