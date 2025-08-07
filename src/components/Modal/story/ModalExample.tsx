@@ -3,10 +3,13 @@ import { Button } from "../../Button/Button";
 import { CenteredContainer, Modal } from "../Modal";
 
 export const ModalExample = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBasicModalOpen, setIsBasicModalOpen] = useState(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openBasicModal = () => setIsBasicModalOpen(true);
+  const closeBasicModal = () => setIsBasicModalOpen(false);
+  const openFormModal = () => setIsFormModalOpen(true);
+  const closeFormModal = () => setIsFormModalOpen(false);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -14,11 +17,11 @@ export const ModalExample = () => {
 
       <div style={{ marginBottom: "20px" }}>
         <h3>Basic Modal</h3>
-        <Button variant="primary" onClick={openModal}>
+        <Button variant="primary" onClick={openBasicModal}>
           Open Modal
         </Button>
 
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal isOpen={isBasicModalOpen} onClose={closeBasicModal}>
           <CenteredContainer>
             <div
               style={{
@@ -44,10 +47,10 @@ export const ModalExample = () => {
                   justifyContent: "flex-end",
                 }}
               >
-                <Button variant="secondary" onClick={closeModal}>
+                <Button variant="secondary" onClick={closeBasicModal}>
                   Cancel
                 </Button>
-                <Button variant="primary" onClick={closeModal}>
+                <Button variant="primary" onClick={closeBasicModal}>
                   Confirm
                 </Button>
               </div>
@@ -58,11 +61,11 @@ export const ModalExample = () => {
 
       <div style={{ marginBottom: "20px" }}>
         <h3>Modal with Form</h3>
-        <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+        <Button variant="primary" onClick={openFormModal}>
           Open Form Modal
         </Button>
 
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal isOpen={isFormModalOpen} onClose={closeFormModal}>
           <CenteredContainer>
             <div
               style={{
@@ -79,7 +82,7 @@ export const ModalExample = () => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  closeModal();
+                  closeFormModal();
                   alert("Form submitted!");
                 }}
               >
@@ -137,7 +140,7 @@ export const ModalExample = () => {
                   <Button
                     type="button"
                     variant="secondary"
-                    onClick={closeModal}
+                    onClick={closeFormModal}
                   >
                     Cancel
                   </Button>
