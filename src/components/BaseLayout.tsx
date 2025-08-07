@@ -3,6 +3,7 @@ import { semantic } from "../theme/tokens";
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { RouteTitle } from "../routes/RouteTitle";
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -19,6 +20,7 @@ const MainContent = styled.main`
 
 export const BaseLayout = () => (
   <AppContainer>
+    <RouteTitle />
     <Header />
     <MainContent>
       <Outlet />

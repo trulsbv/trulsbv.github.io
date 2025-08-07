@@ -1,9 +1,11 @@
 import Hero from "../../components/Hero";
 import { ComponentsGrid } from "../../components/ComponentsGrid";
 
-export const HomePage = () => (
-  <>
-    <Hero />
-    <ComponentsGrid />
-  </>
-);
+export const HomePage = () => {
+  return (
+    <>
+      <Hero />
+      <ComponentsGrid />
+    </>
+  );
+};
