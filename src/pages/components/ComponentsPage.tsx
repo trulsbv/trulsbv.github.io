@@ -1,22 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
-import { ROUTES } from "../../routes/types";
+import { Outlet } from "react-router-dom";
+import { ComponentsGrid } from "../../components/ComponentsGrid";
 
 export const ComponentsPage = () => {
   return (
     <>
-      <h1>Components</h1>
-      <ul>
-        <li>
-          <Link to={ROUTES.COMPONENT_DETAIL.replace(":componentName", "modal")}>
-            Modal
-          </Link>
-        </li>
-        <li>
-          <Link to={ROUTES.COMPONENT_DETAIL.replace(":componentName", "button")}>
-            Button
-          </Link>
-        </li>
-      </ul>
+      <ComponentsGrid />
       <Outlet />
     </>
   );
