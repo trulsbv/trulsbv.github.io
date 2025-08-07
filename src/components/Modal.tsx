@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
+import React, { useEffect, useRef } from "react";
 
 export type ModalProps = {
   isOpen: boolean;
@@ -47,5 +47,18 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     </dialog>
   );
 };
+
+export const CenteredContainer = ({ children }: React.PropsWithChildren) => (
+  <div
+    style={{
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+    }}
+  >
+    {children}
+  </div>
+);
 
 export default Modal;

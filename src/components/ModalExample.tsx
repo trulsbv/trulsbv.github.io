@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Modal } from "./Modal";
+import { Button } from "./Button";
+import { CenteredContainer, Modal } from "./Modal";
 
 // Example styled components for modal content
 const ModalContent = styled.div`
@@ -34,45 +35,6 @@ const ModalFooter = styled.div`
   display: flex;
   gap: 12px;
   justify-content: flex-end;
-`;
-
-const Button = styled.button<{ variant?: "primary" | "secondary" }>`
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  ${(props) =>
-    props.variant === "primary"
-      ? `
-    background-color: #3b82f6;
-    color: white;
-    
-    &:hover {
-      background-color: #2563eb;
-    }
-    
-    &:focus {
-      outline: 2px solid #1d4ed8;
-      outline-offset: 2px;
-    }
-  `
-      : `
-    background-color: #f3f4f6;
-    color: #374151;
-    
-    &:hover {
-      background-color: #e5e7eb;
-    }
-    
-    &:focus {
-      outline: 2px solid #3b82f6;
-      outline-offset: 2px;
-    }
-  `}
 `;
 
 // Example container
@@ -120,26 +82,30 @@ export const ModalExample: React.FC = () => {
 
       {/* Modal with custom content */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <ModalContent>
-          <ModalHeader>
-            <ModalTitle>Example Modal</ModalTitle>
-          </ModalHeader>
+        <CenteredContainer>
+          <ModalContent>
+            <ModalHeader>
+              <ModalTitle>Example Modal</ModalTitle>
+            </ModalHeader>
 
-          <ModalBody>
-            <p>This is a modal using the native HTML dialog element.</p>
-            <p>
-              The content is completely customizable and can include any React
-              components.
-            </p>
-          </ModalBody>
+            <ModalBody>
+              <p>This is a modal using the native HTML dialog element.</p>
+              <p>
+                The content is completely customizable and can include any React
+                components.
+              </p>
+            </ModalBody>
 
-          <ModalFooter>
-            <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
-            <Button variant="primary" onClick={() => setIsModalOpen(false)}>
-              Confirm
-            </Button>
-          </ModalFooter>
-        </ModalContent>
+            <ModalFooter>
+              <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={() => setIsModalOpen(false)}>
+                Confirm
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </CenteredContainer>
       </Modal>
     </ExampleContainer>
   );
