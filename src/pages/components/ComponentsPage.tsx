@@ -10,6 +10,11 @@ export const ComponentsPage = () => (
           Hero
         </Link>
       </li>
+      <li>
+        <Link to={ROUTES.COMPONENT_DETAIL.replace(":componentName", "modal")}>
+          Modal
+        </Link>
+      </li>
     </ul>
     <Outlet />
   </>
