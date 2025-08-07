@@ -12,4 +12,9 @@ test.describe("Home Page", () => {
     // Check that the main content is present
     await expect(page.getByRole("heading", { name: "Welcome" })).toBeVisible();
   });
+
+  test("should set document title to 'trulsbv.dev - home'", async ({ page }) => {
+    await page.goto("/");
+    await expect(page).toHaveTitle(/trulsbv\.dev - home/);
+  });
 });
