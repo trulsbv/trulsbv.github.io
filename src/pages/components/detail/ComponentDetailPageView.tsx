@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
 import "prismjs/themes/prism.css";
@@ -22,10 +22,12 @@ const CodeDisplay = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
+  const codeRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    Prism.highlightAll();
-  }, [code.content]);
+    if (!open || !codeRef.current) return;
+    Prism.highlightElement(codeRef.current);
+  }, [open, code.content]);
 
   const handleCopy = async () => {
     await code.onCopy();
@@ -57,8 +59,14 @@ const CodeDisplay = ({
         </div>
       </div>
       {open && (
-        <pre id="component-code-content" className="code-content" style={{ background: semantic.code.containerBackground, color: semantic.code.text }}>
-          <code className="language-typescript">{code.content}</code>
+        <pre
+          id="component-code-content"
+          className="code-content"
+          style={{ background: semantic.code.containerBackground, color: semantic.code.text }}
+        >
+          <code ref={codeRef} className="language-typescript">
+            {code.content}
+          </code>
         </pre>
       )}
     </div>
