@@ -24,6 +24,23 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Restore original path if redirected from 404.html
+      (function () {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var redirect = params.get('redirect');
+          if (redirect) {
+            var target = decodeURIComponent(redirect);
+            // Avoid loops: only replace if different from current path
+            var current = window.location.pathname + window.location.search + window.location.hash;
+            if (target !== current) {
+              window.history.replaceState(null, '', target);
+            }
+          }
+        } catch (_) {}
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
