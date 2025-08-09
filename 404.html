@@ -46,7 +46,7 @@
 
     <script>
       // GitHub Pages 404 Redirect Hack
-      // This script captures the current URL path and redirects to index.html
+      // This script captures the current URL path and redirects to the root
       // while preserving the path for the client-side router to handle
 
       (function () {
@@ -55,16 +55,15 @@
         var search = window.location.search;
         var hash = window.location.hash;
 
-        // Construct the redirect URL to index.html with the original path
-        var redirectUrl =
-          window.location.origin + "/index.html" + search + hash;
+        // Redirect to the root, which will load index.html
+        var redirectUrl = window.location.origin + search + hash;
 
         // Update the browser history to show the correct URL
         if (window.history && window.history.replaceState) {
           window.history.replaceState(null, null, path + search + hash);
         }
 
-        // Redirect to index.html
+        // Redirect to root (which serves index.html)
         window.location.replace(redirectUrl);
       })();
     </script>
