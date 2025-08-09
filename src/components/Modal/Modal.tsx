@@ -1,13 +1,15 @@
-import type { ReactNode } from "react";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export type ModalProps = {
   isOpen: boolean;
-  onClose: () => void;
-  children: ReactNode;
+  onClose: VoidFunction;
 };
 
-export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+export const Modal = ({
+  isOpen,
+  onClose,
+  children,
+}: React.PropsWithChildren<ModalProps>) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
