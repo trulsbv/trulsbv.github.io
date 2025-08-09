@@ -1,10 +1,21 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
+import { copyFileSync, existsSync } from "fs";
 
 export default defineConfig({
   base: "",
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: "copy-404",
+      closeBundle() {
+        // Copy 404.html to dist after build
+        if (existsSync("404.html")) {
+          copyFileSync("404.html", "dist/404.html");
+        }
+      },
+    },
+  ],
   optimizeDeps: {
     exclude: ["@playwright/test"],
   },
@@ -13,13 +24,5 @@ export default defineConfig({
   },
   preview: {
     port: 5173,
-  },
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, "index.html"),
-        "404": resolve(__dirname, "404.html"),
-      },
-    },
   },
 });
