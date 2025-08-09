@@ -114,6 +114,9 @@ export const ComponentsIndex = () => {
           aria-label="Search components"
         />
       </HeaderRow>
+      <div style={{ marginBottom: "0.75rem" }}>
+        <Chip to="/components/advanced">Advanced examples</Chip>
+      </div>
       <Grid>
         {components.map(({ display, route }) => (
           <Chip key={route} to={`/components/${route}`} end>

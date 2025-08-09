@@ -1,6 +1,7 @@
 import { type RouteObject } from "react-router-dom";
 import { ComponentsPage } from "./ComponentsPage";
 import { ComponentDetailPage } from "./detail/ComponentDetailPage";
+import { AdvancedExamplesPage } from "./AdvancedExamplesPage";
 
 export const componentsRoutes: RouteObject = {
   path: "components",
@@ -14,6 +15,11 @@ export const componentsRoutes: RouteObject = {
         getTitle: (params: { componentName: string }) =>
           `component - ${params.componentName}`,
       },
+    },
+    {
+      path: "advanced",
+      element: <AdvancedExamplesPage />,
+      handle: { title: "components - advanced" },
     },
   ],
 };
