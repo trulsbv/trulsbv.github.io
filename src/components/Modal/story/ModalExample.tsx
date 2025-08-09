@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "../../Button/Button";
-import { CenteredContainer, Modal } from "../Modal";
+import { Modal } from "../Modal";
+import { CenteredContainer } from "../../CenteredContainer";
 
 export const ModalExample = () => {
   const [isBasicModalOpen, setIsBasicModalOpen] = useState(false);
