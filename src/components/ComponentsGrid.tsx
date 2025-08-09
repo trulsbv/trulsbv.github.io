@@ -8,7 +8,6 @@ const Grid = styled.div`
   gap: 1.5rem;
   padding: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
 `;
 
 const Section = styled.section`
@@ -29,6 +28,12 @@ const components = [
     description:
       "A reusable modal dialog component with backdrop click to close, keyboard navigation support, and flexible content rendering.",
     componentName: "Modal",
+  },
+  {
+    name: "Popover",
+    description:
+      "A lightweight popover using the native HTML Popover API with light-dismiss, ESC support, and anchor positioning.",
+    componentName: "Popover",
   },
   {
     name: "Button",
