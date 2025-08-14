@@ -70,7 +70,7 @@ code {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  background: var(--code-container-bg, #F4F2F0);
+  background: var(--code-container-bg, #f4f2f0);
   border: 1px solid var(--code-border, #e5e7eb);
 }
 
@@ -122,7 +122,7 @@ code {
 .code-content {
   margin: 0;
   padding: 0.75rem 1rem 1rem;
-  background: var(--code-container-bg, #F4F2F0);
+  background: var(--code-container-bg, #f4f2f0);
   color: var(--foreground, #111827);
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -143,7 +143,7 @@ code {
 
 /* Ensure Prism.js doesn't override our background */
 .code-content pre[class*="language-"] {
-  background: var(--code-container-bg, #F4F2F0);
+  background: var(--code-container-bg, #f4f2f0);
   margin: 0;
   padding: 0;
 }
@@ -167,7 +167,21 @@ code {
   outline-offset: 2px;
 }
 
+/* Remove focus ring from dialog element */
+dialog:focus {
+  outline: none;
+}
+
 /* Smooth transitions for all interactive elements */
 * {
   transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Native dialog element styling */
+dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  margin: 0;
 }
