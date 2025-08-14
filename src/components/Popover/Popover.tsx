@@ -16,9 +16,10 @@ export type PopoverProps = {
 
 /**
  * Popover powered by the native HTML Popover API
- * - Uses popover="auto" for built-in light-dismiss and ESC handling
+ * - Uses popover="manual" for better control over nested popovers
  * - Imperatively controlled via isOpen prop
  * - Optionally positions relative to an anchor element
+ * - Handles nested popovers by preventing event propagation
  */
 export const Popover = ({
   isOpen,
@@ -108,28 +109,60 @@ export const Popover = ({
     };
   }, [isOpen, computePosition]);
 
-  // Sync external state when user dismisses (light-dismiss / ESC)
+  // Handle clicks outside to close popover (manual light-dismiss)
   useEffect(() => {
-    const popover = popoverRef.current as any;
-    if (!popover) return;
+    if (!isOpen) return;
 
-    const onToggle = (e: any) => {
-      // newState is "open" | "closed"
-      if (e?.newState === "closed" && isOpen) {
+    const handleClickOutside = (event: MouseEvent) => {
+      const popover = popoverRef.current;
+      if (!popover) return;
+
+      // Check if click is outside the popover and not on the anchor
+      const isClickInsidePopover = popover.contains(event.target as Node);
+      const isClickOnAnchor = anchorRef?.current?.contains(event.target as Node);
+      
+      if (!isClickInsidePopover && !isClickOnAnchor) {
         onClose();
       }
     };
 
-    popover.addEventListener("toggle", onToggle);
-    return () => popover.removeEventListener("toggle", onToggle);
+    // Use capture phase to handle clicks before they bubble
+    document.addEventListener("mousedown", handleClickOutside, { capture: true });
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside, { capture: true });
+    };
+  }, [isOpen, onClose, anchorRef]);
+
+  // Handle ESC key to close popover
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen, onClose]);
+
+  // Handle clicks inside popover to prevent event bubbling
+  const handlePopoverClick = (event: React.MouseEvent) => {
+    // Stop propagation to prevent parent popovers from closing
+    event.stopPropagation();
+  };
 
   return (
     <div
       ref={popoverRef}
-      popover="auto"
+      popover="manual"
       role={role}
       className={className}
+      onClick={handlePopoverClick}
       style={{
         position: "fixed",
         inset: "auto auto auto auto",
