@@ -167,21 +167,7 @@ code {
   outline-offset: 2px;
 }
 
-/* Remove focus ring from dialog element */
-dialog:focus {
-  outline: none;
-}
-
 /* Smooth transitions for all interactive elements */
 * {
   transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
-}
-
-/* Native dialog element styling */
-dialog {
-  border: none;
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
-  margin: 0;
 }

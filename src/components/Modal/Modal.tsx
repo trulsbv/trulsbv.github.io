@@ -9,7 +9,10 @@ export const Modal = ({
   isOpen,
   onClose,
   children,
-}: React.PropsWithChildren<ModalProps>) => {
+  ...HTMLattributes
+}: React.PropsWithChildren<
+  ModalProps & React.DialogHTMLAttributes<HTMLDialogElement>
+>) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export const Modal = ({
   };
 
   return (
-    <dialog ref={dialogRef} onClick={handleBackdropClick}>
+    <dialog ref={dialogRef} onClick={handleBackdropClick} {...HTMLattributes}>
       <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </dialog>
   );

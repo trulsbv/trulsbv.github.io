@@ -22,7 +22,13 @@ export const ModalExample = () => {
           Open Modal
         </Button>
 
-        <Modal isOpen={isBasicModalOpen} onClose={closeBasicModal}>
+        <Modal
+          isOpen={isBasicModalOpen}
+          onClose={closeBasicModal}
+          style={{
+            border: "none",
+          }}
+        >
           <CenteredContainer>
             <div
               style={{
