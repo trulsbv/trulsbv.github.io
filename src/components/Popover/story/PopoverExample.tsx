@@ -4,14 +4,27 @@ import { Popover } from "../Popover";
 
 export const PopoverExample = () => {
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState<"top" | "bottom" | "left" | "right">("bottom");
+  const [placement, setPlacement] = useState<
+    "top" | "bottom" | "left" | "right"
+  >("bottom");
   const anchorRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div style={{ padding: 20 }}>
       <h2>Popover Component Examples</h2>
 
-      <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 16 }}>
+      <div>
+        <p>Open: {open ? "true" : "false"}</p>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          gap: 12,
+          alignItems: "center",
+          marginBottom: 16,
+        }}
+      >
         <label>Placement:</label>
         <select
           value={placement}
@@ -55,14 +68,30 @@ export const PopoverExample = () => {
             minWidth: 220,
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 8,
+            }}
+          >
             <strong>Popover title</strong>
-            <button onClick={() => setOpen(false)} aria-label="Close popover" style={{ border: "none", background: "transparent", cursor: "pointer" }}>
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Close popover"
+              style={{
+                border: "none",
+                background: "transparent",
+                cursor: "pointer",
+              }}
+            >
               ×
             </button>
           </div>
           <div style={{ color: "#374151", lineHeight: 1.5 }}>
-            This popover uses the native HTML Popover API. Click outside or press ESC to close.
+            This popover uses the native HTML Popover API. Click outside or
+            press ESC to close.
           </div>
         </div>
       </Popover>
@@ -71,7 +100,9 @@ export const PopoverExample = () => {
         <h3>Usage tips</h3>
         <ul style={{ lineHeight: 1.6 }}>
           <li>Native light-dismiss and ESC-to-close handled by the browser</li>
-          <li>Controlled via the <code>isOpen</code> prop</li>
+          <li>
+            Controlled via the <code>isOpen</code> prop
+          </li>
           <li>Positioned relative to the trigger by measuring DOM rects</li>
         </ul>
       </div>
