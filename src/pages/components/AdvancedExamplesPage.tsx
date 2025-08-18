@@ -107,7 +107,6 @@ export const AdvancedExamplesPage = () => {
           aria-haspopup="dialog"
           aria-expanded={outerPopoverOpen}
           popoverTarget="outer-popover"
-          anchorId="outer-popover-anchor"
         >
           Toggle Popover
         </Button>

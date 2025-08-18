@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Button } from "../../Button/Button";
-import { Popover, PopoverTrigger } from "../Popover";
+import { Popover, Popover2, PopoverTrigger } from "../Popover";
 
 export const PopoverExample = () => {
   const [open, setOpen] = useState(false);
@@ -147,6 +147,57 @@ export const PopoverExample = () => {
             This uses PopoverTrigger for automatic anchor-name and ARIA setup.
           </div>
         </Popover>
+      </div>
+
+      <div style={{ marginTop: 32 }}>
+        <h3>Improved Popover2 Usage</h3>
+        <p style={{ marginBottom: 16 }}>
+          The improved Popover2 component automatically handles all trigger
+          properties:
+        </p>
+        <Popover2
+          isOpen={open}
+          onClose={() => setOpen(false)}
+          placement={placement}
+          content={
+            <div style={{ padding: "12px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 8,
+                }}
+              >
+                <strong>Improved Popover2</strong>
+                <button
+                  onClick={() => setOpen(false)}
+                  aria-label="Close popover"
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+              <div style={{ color: "#374151", lineHeight: 1.5 }}>
+                This uses the improved Popover2 component with:
+                <br />
+                • Automatic ARIA attributes
+                <br />
+                • Automatic anchor-name setup
+                <br />• Configurable placement: {placement}
+                <br />• Proper onClose handling
+              </div>
+            </div>
+          }
+        >
+          <Button variant="secondary" onClick={() => setOpen((v) => !v)}>
+            Toggle Popover2 (Improved)
+          </Button>
+        </Popover2>
       </div>
     </div>
   );

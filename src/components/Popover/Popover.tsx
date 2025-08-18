@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useId, useRef, forwardRef } from "react";
 import styled from "styled-components";
 
 /**
@@ -91,47 +91,6 @@ export const Popover = ({
 
 export default Popover;
 
-// PopoverTrigger component for setting anchor-name and ARIA attributes
-export type PopoverTriggerProps = {
-  id: string;
-  anchorId: string;
-  isOpen: boolean;
-  children: React.ReactElement;
-};
-
-export const PopoverTrigger = ({
-  id,
-  anchorId,
-  isOpen,
-  children,
-}: PopoverTriggerProps) => {
-  const childRef = useRef<HTMLElement>(null);
-
-  // Set anchor-name on the child element
-  useEffect(() => {
-    if (childRef.current) {
-      childRef.current.style.setProperty("anchor-name", `--${anchorId}`);
-    }
-  }, [anchorId]);
-
-  // Create a wrapper that applies the anchor-name and renders the child
-  const TriggerWrapper = styled.div`
-    anchor-name: --${anchorId};
-  `;
-
-  return (
-    <TriggerWrapper>
-      {React.cloneElement(children, {
-        popoverTarget: id,
-        "aria-haspopup": "dialog",
-        "aria-expanded": isOpen,
-        "aria-controls": id,
-        ref: childRef,
-      } as any)}
-    </TriggerWrapper>
-  );
-};
-
 // Styled component for the popover with anchor positioning
 const StyledPopover = styled.div<{
   placement: PopoverPlacement;
@@ -182,3 +141,113 @@ const StyledPopover = styled.div<{
     transform: translate(-50%, -50%);
   }
 `;
+
+export type Popover2Props = {
+  isOpen: boolean;
+  onClose?: () => void;
+  id?: string;
+  placement?: PopoverPlacement;
+  content: React.ReactElement;
+  children: React.ReactElement;
+};
+
+export const Popover2 = forwardRef<HTMLDivElement, Popover2Props>(
+  (
+    {
+      isOpen,
+      onClose,
+      id: providedId,
+      placement = "bottom",
+      content,
+      children,
+    },
+    ref
+  ) => {
+    const generatedId = useId();
+    const id = providedId || `popover-${generatedId}`;
+    const anchorId = `anchor-${id}`;
+    const popoverId = `popover-${id}`;
+
+    // Add anchor-name to the trigger element
+    const triggerRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+      if (triggerRef.current) {
+        triggerRef.current.style.setProperty("anchor-name", `--${anchorId}`);
+      }
+    }, [anchorId]);
+
+    // Merge existing props with required popover props
+    const triggerProps = {
+      ref: triggerRef,
+      popoverTarget: popoverId,
+      "aria-haspopup": "dialog" as const,
+      "aria-expanded": isOpen,
+      "aria-controls": popoverId,
+    };
+
+    // Merge with existing props from the child element
+    const mergedProps = {
+      ...(children.props as Record<string, any>),
+      ...triggerProps,
+    };
+
+    return (
+      <div ref={ref}>
+        {React.cloneElement(children, mergedProps)}
+        <Popover
+          isOpen={isOpen}
+          onClose={onClose || (() => {})}
+          id={popoverId}
+          anchorId={anchorId}
+          placement={placement}
+        >
+          {content}
+        </Popover>
+      </div>
+    );
+  }
+);
+
+Popover2.displayName = "Popover2";
+
+// PopoverTrigger component for setting anchor-name and ARIA attributes
+export type PopoverTriggerProps = {
+  id: string;
+  anchorId: string;
+  isOpen: boolean;
+  children: React.ReactElement;
+};
+
+export const PopoverTrigger = ({
+  id,
+  anchorId,
+  isOpen,
+  children,
+}: PopoverTriggerProps) => {
+  const childRef = useRef<HTMLElement>(null);
+
+  // Set anchor-name on the child element
+  useEffect(() => {
+    if (childRef.current) {
+      childRef.current.style.setProperty("anchor-name", `--${anchorId}`);
+    }
+  }, [anchorId]);
+
+  // Create a wrapper that applies the anchor-name and renders the child
+  const TriggerWrapper = styled.div`
+    anchor-name: --${anchorId};
+  `;
+
+  return (
+    <TriggerWrapper>
+      {React.cloneElement(children, {
+        popoverTarget: id,
+        "aria-haspopup": "dialog",
+        "aria-expanded": isOpen,
+        "aria-controls": id,
+        ref: childRef,
+      } as any)}
+    </TriggerWrapper>
+  );
+};
