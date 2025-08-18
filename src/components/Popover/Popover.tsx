@@ -1,181 +1,184 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event
+ */
+type ToggleEvent = Event & {
+  newState: "open" | "closed";
+  oldState: "open" | "closed";
+};
+
+const isToggleEvent = (event: Event): event is ToggleEvent =>
+  "newState" in event && "oldState" in event;
 
 export type PopoverPlacement = "top" | "bottom" | "left" | "right";
 
 export type PopoverProps = {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
-  anchorRef?: React.RefObject<HTMLElement>;
-  placement?: PopoverPlacement;
-  offset?: number;
-  className?: string;
-  style?: React.CSSProperties;
-  role?: React.AriaRole;
+  id: string;
+  anchorId: string;
+  placement: PopoverPlacement;
 };
 
 /**
- * Popover powered by the native HTML Popover API
- * - Uses popover="manual" for better control over nested popovers
- * - Imperatively controlled via isOpen prop
- * - Optionally positions relative to an anchor element
- * - Handles nested popovers by preventing event propagation
+ * Requires the following attributes to be set on the trigger element:
+ * - popoverTarget={id}
+ * - aria-haspopup="dialog"
+ * - aria-expanded={isOpen}
+ * - aria-controls={id}
+ * - anchor-name: --{anchorId} (if anchorId is provided)
  */
 export const Popover = ({
   isOpen,
   onClose,
   children,
-  anchorRef,
-  placement = "bottom",
-  offset = 8,
-  className,
-  style,
-  role = "dialog",
-}: PopoverProps) => {
+  id,
+  anchorId,
+  placement,
+}: React.PropsWithChildren<PopoverProps>) => {
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  const computePosition = useMemo(() => {
-    return () => {
-      const popover = popoverRef.current;
-      const anchor = anchorRef?.current;
-      if (!popover || !anchor) return;
-
-      const anchorRect = anchor.getBoundingClientRect();
-      const popRect = popover.getBoundingClientRect();
-
-      let top = 0;
-      let left = 0;
-
-      switch (placement) {
-        case "top":
-          top = anchorRect.top - popRect.height - offset;
-          left = anchorRect.left + anchorRect.width / 2 - popRect.width / 2;
-          break;
-        case "bottom":
-          top = anchorRect.bottom + offset;
-          left = anchorRect.left + anchorRect.width / 2 - popRect.width / 2;
-          break;
-        case "left":
-          top = anchorRect.top + anchorRect.height / 2 - popRect.height / 2;
-          left = anchorRect.left - popRect.width - offset;
-          break;
-        case "right":
-          top = anchorRect.top + anchorRect.height / 2 - popRect.height / 2;
-          left = anchorRect.right + offset;
-          break;
-      }
-
-      // Clamp within viewport with small padding
-      const padding = 8;
-      const maxLeft = window.innerWidth - popRect.width - padding;
-      const maxTop = window.innerHeight - popRect.height - padding;
-      left = Math.max(padding, Math.min(maxLeft, left));
-      top = Math.max(padding, Math.min(maxTop, top));
-
-      popover.style.top = `${top}px`;
-      popover.style.left = `${left}px`;
-    };
-  }, [anchorRef, offset, placement]);
-
-  // Open/close management
   useEffect(() => {
-    const popover = popoverRef.current as any;
+    const popover = popoverRef.current;
     if (!popover) return;
-    if (isOpen) {
-      // show first, then measure and position
-      if (!popover.matches(":popover-open")) {
-        popover.showPopover?.();
-      }
-      // Position on next frame so measurements are accurate
-      requestAnimationFrame(() => {
-        computePosition();
-      });
-    } else {
-      if (popover.matches?.(":popover-open")) {
-        popover.hidePopover?.();
-      }
-    }
-  }, [isOpen, computePosition]);
 
-  // Reposition on window resize/scroll while open
-  useEffect(() => {
-    if (!isOpen) return;
-    const handle = () => computePosition();
-    window.addEventListener("resize", handle);
-    window.addEventListener("scroll", handle, { passive: true });
-    return () => {
-      window.removeEventListener("resize", handle);
-      window.removeEventListener("scroll", handle as any);
-    };
-  }, [isOpen, computePosition]);
-
-  // Handle clicks outside to close popover (manual light-dismiss)
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleClickOutside = (event: MouseEvent) => {
-      const popover = popoverRef.current;
-      if (!popover) return;
-
-      // Check if click is outside the popover and not on the anchor
-      const isClickInsidePopover = popover.contains(event.target as Node);
-      const isClickOnAnchor = anchorRef?.current?.contains(event.target as Node);
-      
-      if (!isClickInsidePopover && !isClickOnAnchor) {
-        onClose();
+    const handleToggle = (event: Event) => {
+      if (isToggleEvent(event) && event.newState === "open" && !isOpen) {
+        event.preventDefault();
       }
     };
 
-    // Use capture phase to handle clicks before they bubble
-    document.addEventListener("mousedown", handleClickOutside, { capture: true });
-    
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside, { capture: true });
-    };
-  }, [isOpen, onClose, anchorRef]);
-
-  // Handle ESC key to close popover
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    popover.addEventListener("beforetoggle", handleToggle);
+    return () => popover.removeEventListener("beforetoggle", handleToggle);
   }, [isOpen, onClose]);
 
-  // Handle clicks inside popover to prevent event bubbling
-  const handlePopoverClick = (event: React.MouseEvent) => {
-    // Stop propagation to prevent parent popovers from closing
-    event.stopPropagation();
-  };
+  useEffect(() => {
+    const popover = popoverRef.current;
+
+    if (!popover || isOpen) {
+      return;
+    }
+
+    popover.hidePopover();
+  }, [isOpen]);
+
+  // Add escape key handling
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
-    <div
+    <StyledPopover
       ref={popoverRef}
       popover="manual"
-      role={role}
-      className={className}
-      onClick={handlePopoverClick}
-      style={{
-        position: "fixed",
-        inset: "auto auto auto auto",
-        border: "none",
-        padding: 0,
-        background: "transparent",
-        margin: 0,
-        ...style,
-      }}
+      id={id}
+      placement={placement}
+      anchorId={anchorId}
     >
       {children}
-    </div>
+    </StyledPopover>
   );
 };
 
 export default Popover;
+
+// PopoverTrigger component for setting anchor-name and ARIA attributes
+export type PopoverTriggerProps = {
+  id: string;
+  anchorId: string;
+  isOpen: boolean;
+  children: React.ReactElement;
+};
+
+export const PopoverTrigger = ({
+  id,
+  anchorId,
+  isOpen,
+  children,
+}: PopoverTriggerProps) => {
+  const childRef = useRef<HTMLElement>(null);
+
+  // Set anchor-name on the child element
+  useEffect(() => {
+    if (childRef.current) {
+      childRef.current.style.setProperty("anchor-name", `--${anchorId}`);
+    }
+  }, [anchorId]);
+
+  // Create a wrapper that applies the anchor-name and renders the child
+  const TriggerWrapper = styled.div`
+    anchor-name: --${anchorId};
+  `;
+
+  return (
+    <TriggerWrapper>
+      {React.cloneElement(children, {
+        popoverTarget: id,
+        "aria-haspopup": "dialog",
+        "aria-expanded": isOpen,
+        "aria-controls": id,
+        ref: childRef,
+      } as any)}
+    </TriggerWrapper>
+  );
+};
+
+// Styled component for the popover with anchor positioning
+const StyledPopover = styled.div<{
+  placement: PopoverPlacement;
+  anchorId: string;
+}>`
+  /* Anchor positioning based on placement */
+  ${({ placement, anchorId }) => {
+    const anchorName = `--${anchorId}`;
+
+    switch (placement) {
+      case "top":
+        return `
+          position-anchor: ${anchorName};
+          bottom: anchor(top);
+          justify-self: anchor-center;
+        `;
+      case "bottom":
+        return `
+          position-anchor: ${anchorName};
+          top: anchor(bottom);
+          justify-self: anchor-center;
+        `;
+      case "left":
+        return `
+          position-anchor: ${anchorName};
+          right: anchor(left);
+          align-self: anchor-center;
+        `;
+      case "right":
+        return `
+          position-anchor: ${anchorName};
+          left: anchor(right);
+          align-self: anchor-center;
+        `;
+      default:
+        return `
+          position-anchor: ${anchorName};
+          justify-self: anchor-center;
+        `;
+    }
+  }}
+
+  /* Fallback positioning for browsers that don't support anchor positioning */
+  @supports not (anchor-name: --test) {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
