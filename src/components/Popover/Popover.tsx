@@ -154,6 +154,8 @@ const StyledPopover = styled.div<{
   placement: PopoverPlacement;
   anchorId: string;
 }>`
+  inset: auto;
+
   /* Anchor positioning based on placement */
   ${({ placement, anchorId }) => {
     const anchorName = `--${anchorId}`;
