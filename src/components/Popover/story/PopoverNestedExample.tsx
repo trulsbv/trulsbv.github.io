@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "../../Button/Button";
 import { Popover } from "../Popover";
 
@@ -8,11 +8,30 @@ export const PopoverNestedExample = () => {
   const outerAnchorRef = useRef<HTMLButtonElement>(null);
   const innerAnchorRef = useRef<HTMLButtonElement>(null);
 
+  // Set anchor-name on the button elements
+  useEffect(() => {
+    if (outerAnchorRef.current) {
+      outerAnchorRef.current.style.setProperty(
+        "anchor-name",
+        "--outer-trigger"
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (innerAnchorRef.current) {
+      innerAnchorRef.current.style.setProperty(
+        "anchor-name",
+        "--inner-trigger"
+      );
+    }
+  }, []);
+
   return (
     <div style={{ padding: 20 }}>
-      <h2>Nested Popovers</h2>
+      <h2>Nested Popovers with Anchor Positioning</h2>
       <Button
-        ref={outerAnchorRef as any}
+        ref={outerAnchorRef}
         variant="primary"
         onClick={() => setOuterOpen((v) => !v)}
         aria-haspopup="dialog"
@@ -29,6 +48,8 @@ export const PopoverNestedExample = () => {
           setInnerOpen(false);
         }}
         id="outer-popover"
+        placement="bottom"
+        anchorId="outer-trigger"
       >
         <div
           style={{
@@ -63,7 +84,7 @@ export const PopoverNestedExample = () => {
           </div>
           <p style={{ marginTop: 0 }}>Open another popover from here:</p>
           <Button
-            ref={innerAnchorRef as any}
+            ref={innerAnchorRef}
             variant="secondary"
             onClick={() => setInnerOpen((v) => !v)}
             aria-haspopup="dialog"
@@ -78,6 +99,8 @@ export const PopoverNestedExample = () => {
             isOpen={innerOpen}
             onClose={() => setInnerOpen(false)}
             id="inner-popover"
+            placement="right"
+            anchorId="inner-trigger"
           >
             <div
               style={{
@@ -92,6 +115,10 @@ export const PopoverNestedExample = () => {
               <strong>Inner popover</strong>
               <div style={{ marginTop: 8, color: "#374151" }}>
                 Content inside the inner popover.
+                <br />
+                <small>
+                  Positioned to the right of the inner trigger button.
+                </small>
               </div>
               <button onClick={() => setInnerOpen(false)}>Close</button>
             </div>

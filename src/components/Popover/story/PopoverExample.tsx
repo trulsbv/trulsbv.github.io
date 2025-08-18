@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "../../Button/Button";
 import { Popover } from "../Popover";
 
@@ -7,8 +7,14 @@ export const PopoverExample = () => {
   const [placement, setPlacement] = useState<
     "top" | "bottom" | "left" | "right"
   >("bottom");
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  console.log(`120655 TBV`, open);
+  // Set anchor-name on the button element
+  useEffect(() => {
+    if (buttonRef.current) {
+      buttonRef.current.style.setProperty("anchor-name", "--popover-trigger");
+    }
+  }, []);
 
   return (
     <div style={{ padding: 20 }}>
@@ -40,6 +46,7 @@ export const PopoverExample = () => {
       </div>
 
       <Button
+        ref={buttonRef}
         variant="primary"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="dialog"
@@ -54,6 +61,8 @@ export const PopoverExample = () => {
         isOpen={open}
         onClose={() => setOpen(false)}
         id="example-popover"
+        placement={placement}
+        anchorId="popover-trigger"
       >
         <div>
           <div
@@ -78,8 +87,12 @@ export const PopoverExample = () => {
             </button>
           </div>
           <div style={{ color: "#374151", lineHeight: 1.5 }}>
-            This popover uses the native HTML Popover API. Click outside or
-            press ESC to close.
+            This popover uses the native HTML Popover API with CSS Anchor
+            Positioning.
+            <br />
+            <strong>Placement:</strong> {placement}
+            <br />
+            Click outside or press ESC to close.
           </div>
         </div>
       </Popover>
@@ -91,7 +104,15 @@ export const PopoverExample = () => {
           <li>
             Controlled via the <code>isOpen</code> prop
           </li>
-          <li>Positioned relative to the trigger by measuring DOM rects</li>
+          <li>
+            Uses CSS Anchor Positioning API for precise positioning relative to
+            trigger
+          </li>
+          <li>Supports top, bottom, left, and right placements</li>
+          <li>
+            Fallback to centered positioning for browsers without anchor
+            positioning support
+          </li>
         </ul>
       </div>
     </div>

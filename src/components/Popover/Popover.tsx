@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event
@@ -17,7 +18,8 @@ export type PopoverProps = {
   isOpen: boolean;
   onClose: () => void;
   id: string;
-  children: React.ReactNode;
+  anchorId: string;
+  placement: PopoverPlacement;
 };
 
 /**
@@ -26,12 +28,15 @@ export type PopoverProps = {
  * - aria-haspopup="dialog"
  * - aria-expanded={isOpen}
  * - aria-controls={id}
+ * - anchor-name: --{anchorId} (if anchorId is provided)
  */
 export const Popover = ({
   isOpen,
   onClose,
   children,
   id,
+  anchorId,
+  placement,
 }: React.PropsWithChildren<PopoverProps>) => {
   const popoverRef = useRef<HTMLDivElement>(null);
 
@@ -72,10 +77,67 @@ export const Popover = ({
   }, [isOpen, onClose]);
 
   return (
-    <div ref={popoverRef} popover="manual" role="dialog" id={id}>
+    <StyledPopover
+      ref={popoverRef}
+      popover="manual"
+      id={id}
+      placement={placement}
+      anchorId={anchorId}
+    >
       {children}
-    </div>
+    </StyledPopover>
   );
 };
 
 export default Popover;
+
+// Styled component for the popover with anchor positioning
+const StyledPopover = styled.div<{
+  placement: PopoverPlacement;
+  anchorId: string;
+}>`
+  /* Anchor positioning based on placement */
+  ${({ placement, anchorId }) => {
+    const anchorName = `--${anchorId}`;
+
+    switch (placement) {
+      case "top":
+        return `
+          position-anchor: ${anchorName};
+          bottom: anchor(top);
+          justify-self: anchor-center;
+        `;
+      case "bottom":
+        return `
+          position-anchor: ${anchorName};
+          top: anchor(bottom);
+          justify-self: anchor-center;
+        `;
+      case "left":
+        return `
+          position-anchor: ${anchorName};
+          right: anchor(left);
+          align-self: anchor-center;
+        `;
+      case "right":
+        return `
+          position-anchor: ${anchorName};
+          left: anchor(right);
+          align-self: anchor-center;
+        `;
+      default:
+        return `
+          position-anchor: ${anchorName};
+          justify-self: anchor-center;
+        `;
+    }
+  }}
+
+  /* Fallback positioning for browsers that don't support anchor positioning */
+  @supports not (anchor-name: --test) {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;

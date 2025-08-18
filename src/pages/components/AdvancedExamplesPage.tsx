@@ -77,6 +77,8 @@ export const AdvancedExamplesPage = () => {
           isOpen={modalPopoverOpen}
           onClose={() => setModalPopoverOpen(false)}
           id="modal-popover"
+          anchorId="modal-popover-anchor"
+          placement="bottom"
         >
           <div
             style={{
@@ -105,6 +107,7 @@ export const AdvancedExamplesPage = () => {
           aria-haspopup="dialog"
           aria-expanded={outerPopoverOpen}
           popoverTarget="outer-popover"
+          anchorId="outer-popover-anchor"
         >
           Toggle Popover
         </Button>
@@ -115,6 +118,8 @@ export const AdvancedExamplesPage = () => {
             setInnerModalOpen(false);
           }}
           id="outer-popover"
+          anchorId="outer-popover-anchor"
+          placement="bottom"
         >
           <div
             style={{
