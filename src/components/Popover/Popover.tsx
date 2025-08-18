@@ -1,5 +1,16 @@
 import React, { useEffect, useRef } from "react";
 
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event
+ */
+type ToggleEvent = Event & {
+  newState: "open" | "closed";
+  oldState: "open" | "closed";
+};
+
+const isToggleEvent = (event: Event): event is ToggleEvent =>
+  "newState" in event && "oldState" in event;
+
 export type PopoverPlacement = "top" | "bottom" | "left" | "right";
 
 export type PopoverProps = {
@@ -28,15 +39,14 @@ export const Popover = ({
     const popover = popoverRef.current;
     if (!popover) return;
 
-    const handleToggle = (event: ToggleEvent) => {
-      if (event.newState === "open" && !isOpen) {
+    const handleToggle = (event: Event) => {
+      if (isToggleEvent(event) && event.newState === "open" && !isOpen) {
         event.preventDefault();
       }
     };
 
-    popover.addEventListener("beforetoggle", handleToggle as any);
-    return () =>
-      popover.removeEventListener("beforetoggle", handleToggle as any);
+    popover.addEventListener("beforetoggle", handleToggle);
+    return () => popover.removeEventListener("beforetoggle", handleToggle);
   }, [isOpen, onClose]);
 
   useEffect(() => {
