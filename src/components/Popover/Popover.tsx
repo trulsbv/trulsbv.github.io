@@ -9,6 +9,13 @@ export type PopoverProps = {
   children: React.ReactNode;
 };
 
+/**
+ * Requires the following attributes to be set on the trigger element:
+ * - popoverTarget={id}
+ * - aria-haspopup="dialog"
+ * - aria-expanded={isOpen}
+ * - aria-controls={id}
+ */
 export const Popover = ({
   isOpen,
   onClose,
@@ -41,6 +48,18 @@ export const Popover = ({
 
     popover.hidePopover();
   }, [isOpen]);
+
+  // Add escape key handling
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <div ref={popoverRef} popover="manual" role="dialog" id={id}>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "../../Button/Button";
 import { Popover } from "../Popover";
 
@@ -42,9 +42,9 @@ export const PopoverExample = () => {
       <Button
         variant="primary"
         onClick={() => setOpen((v) => !v)}
-        // aria-haspopup="dialog"
-        // aria-expanded={open}
-        // aria-controls="example-popover"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-controls="example-popover"
         popoverTarget="example-popover"
       >
         Toggle Popover

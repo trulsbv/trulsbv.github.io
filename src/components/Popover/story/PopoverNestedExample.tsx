@@ -17,6 +17,7 @@ export const PopoverNestedExample = () => {
         onClick={() => setOuterOpen((v) => !v)}
         aria-haspopup="dialog"
         aria-expanded={outerOpen}
+        popoverTarget="outer-popover"
       >
         Toggle Outer Popover
       </Button>
@@ -27,9 +28,7 @@ export const PopoverNestedExample = () => {
           setOuterOpen(false);
           setInnerOpen(false);
         }}
-        anchorRef={outerAnchorRef as any}
-        placement="bottom"
-        offset={10}
+        id="outer-popover"
       >
         <div
           style={{
@@ -69,6 +68,7 @@ export const PopoverNestedExample = () => {
             onClick={() => setInnerOpen((v) => !v)}
             aria-haspopup="dialog"
             aria-expanded={innerOpen}
+            popoverTarget="inner-popover"
           >
             Toggle Inner Popover
           </Button>
@@ -77,9 +77,7 @@ export const PopoverNestedExample = () => {
           <Popover
             isOpen={innerOpen}
             onClose={() => setInnerOpen(false)}
-            anchorRef={innerAnchorRef as any}
-            placement="right"
-            offset={8}
+            id="inner-popover"
           >
             <div
               style={{
@@ -95,6 +93,7 @@ export const PopoverNestedExample = () => {
               <div style={{ marginTop: 8, color: "#374151" }}>
                 Content inside the inner popover.
               </div>
+              <button onClick={() => setInnerOpen(false)}>Close</button>
             </div>
           </Popover>
         </div>

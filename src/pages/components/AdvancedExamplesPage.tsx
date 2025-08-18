@@ -25,7 +25,13 @@ export const AdvancedExamplesPage = () => {
           Open Modal
         </Button>
 
-        <Modal isOpen={modalOpen} onClose={() => { setModalOpen(false); setModalPopoverOpen(false); }}>
+        <Modal
+          isOpen={modalOpen}
+          onClose={() => {
+            setModalOpen(false);
+            setModalPopoverOpen(false);
+          }}
+        >
           <CenteredContainer>
             <div
               style={{
@@ -37,16 +43,31 @@ export const AdvancedExamplesPage = () => {
               }}
             >
               <h4 style={{ marginTop: 0 }}>Modal with internal popover</h4>
-              <p style={{ marginBottom: 12 }}>The popover is positioned relative to the button inside the modal.</p>
+              <p style={{ marginBottom: 12 }}>
+                The popover is positioned relative to the button inside the
+                modal.
+              </p>
               <Button
                 ref={modalPopoverAnchorRef as any}
                 variant="secondary"
                 onClick={() => setModalPopoverOpen((v) => !v)}
+                aria-haspopup="dialog"
+                aria-expanded={modalPopoverOpen}
+                popoverTarget="modal-popover"
               >
                 Toggle Popover in Modal
               </Button>
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 16 }}>
-                <Button variant="secondary" onClick={() => setModalOpen(false)}>Close</Button>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: 8,
+                  marginTop: 16,
+                }}
+              >
+                <Button variant="secondary" onClick={() => setModalOpen(false)}>
+                  Close
+                </Button>
               </div>
             </div>
           </CenteredContainer>
@@ -55,9 +76,7 @@ export const AdvancedExamplesPage = () => {
         <Popover
           isOpen={modalPopoverOpen}
           onClose={() => setModalPopoverOpen(false)}
-          anchorRef={modalPopoverAnchorRef as any}
-          placement="bottom"
-          offset={10}
+          id="modal-popover"
         >
           <div
             style={{
@@ -70,7 +89,9 @@ export const AdvancedExamplesPage = () => {
             }}
           >
             <strong>Popover inside modal</strong>
-            <div style={{ marginTop: 8 }}>This popover is anchored to a button within the modal.</div>
+            <div style={{ marginTop: 8 }}>
+              This popover is anchored to a button within the modal.
+            </div>
           </div>
         </Popover>
       </section>
@@ -81,15 +102,19 @@ export const AdvancedExamplesPage = () => {
           ref={popoverAnchorRef as any}
           variant="primary"
           onClick={() => setOuterPopoverOpen((v) => !v)}
+          aria-haspopup="dialog"
+          aria-expanded={outerPopoverOpen}
+          popoverTarget="outer-popover"
         >
           Toggle Popover
         </Button>
         <Popover
           isOpen={outerPopoverOpen}
-          onClose={() => { setOuterPopoverOpen(false); setInnerModalOpen(false); }}
-          anchorRef={popoverAnchorRef as any}
-          placement="bottom"
-          offset={10}
+          onClose={() => {
+            setOuterPopoverOpen(false);
+            setInnerModalOpen(false);
+          }}
+          id="outer-popover"
         >
           <div
             style={{
@@ -101,13 +126,30 @@ export const AdvancedExamplesPage = () => {
               minWidth: 280,
             }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 8,
+              }}
+            >
               <strong>Popover container</strong>
-              <button onClick={() => setOuterPopoverOpen(false)} aria-label="Close" style={{ border: "none", background: "transparent", cursor: "pointer" }}>
+              <button
+                onClick={() => setOuterPopoverOpen(false)}
+                aria-label="Close"
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  cursor: "pointer",
+                }}
+              >
                 ×
               </button>
             </div>
-            <p style={{ marginTop: 0 }}>Open a modal from inside this popover:</p>
+            <p style={{ marginTop: 0 }}>
+              Open a modal from inside this popover:
+            </p>
             <Button variant="secondary" onClick={() => setInnerModalOpen(true)}>
               Open inner modal
             </Button>
@@ -127,8 +169,18 @@ export const AdvancedExamplesPage = () => {
             >
               <h4 style={{ marginTop: 0 }}>Modal opened from popover</h4>
               <p>This modal was triggered by a button inside the popover.</p>
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 16 }}>
-                <Button variant="primary" onClick={() => setInnerModalOpen(false)}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  gap: 8,
+                  marginTop: 16,
+                }}
+              >
+                <Button
+                  variant="primary"
+                  onClick={() => setInnerModalOpen(false)}
+                >
                   Close
                 </Button>
               </div>
