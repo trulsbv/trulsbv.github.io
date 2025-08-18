@@ -91,6 +91,47 @@ export const Popover = ({
 
 export default Popover;
 
+// PopoverTrigger component for setting anchor-name and ARIA attributes
+export type PopoverTriggerProps = {
+  id: string;
+  anchorId: string;
+  isOpen: boolean;
+  children: React.ReactElement;
+};
+
+export const PopoverTrigger = ({
+  id,
+  anchorId,
+  isOpen,
+  children,
+}: PopoverTriggerProps) => {
+  const childRef = useRef<HTMLElement>(null);
+
+  // Set anchor-name on the child element
+  useEffect(() => {
+    if (childRef.current) {
+      childRef.current.style.setProperty("anchor-name", `--${anchorId}`);
+    }
+  }, [anchorId]);
+
+  // Create a wrapper that applies the anchor-name and renders the child
+  const TriggerWrapper = styled.div`
+    anchor-name: --${anchorId};
+  `;
+
+  return (
+    <TriggerWrapper>
+      {React.cloneElement(children, {
+        popoverTarget: id,
+        "aria-haspopup": "dialog",
+        "aria-expanded": isOpen,
+        "aria-controls": id,
+        ref: childRef,
+      } as any)}
+    </TriggerWrapper>
+  );
+};
+
 // Styled component for the popover with anchor positioning
 const StyledPopover = styled.div<{
   placement: PopoverPlacement;

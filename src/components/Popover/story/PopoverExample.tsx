@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "../../Button/Button";
-import { Popover } from "../Popover";
+import { Popover, PopoverTrigger } from "../Popover";
 
 export const PopoverExample = () => {
   const [open, setOpen] = useState(false);
@@ -8,13 +8,6 @@ export const PopoverExample = () => {
     "top" | "bottom" | "left" | "right"
   >("bottom");
   const buttonRef = useRef<HTMLButtonElement>(null);
-
-  // Set anchor-name on the button element
-  useEffect(() => {
-    if (buttonRef.current) {
-      buttonRef.current.style.setProperty("anchor-name", "--popover-trigger");
-    }
-  }, []);
 
   return (
     <div style={{ padding: 20 }}>
@@ -114,6 +107,46 @@ export const PopoverExample = () => {
             positioning support
           </li>
         </ul>
+      </div>
+
+      <div
+        style={{
+          marginTop: 32,
+          padding: "20px",
+          border: "1px solid #e5e7eb",
+          borderRadius: "8px",
+          background: "#f9fafb",
+        }}
+      >
+        <h3>Simplified Usage with PopoverTrigger</h3>
+        <p style={{ marginBottom: 16 }}>
+          You can also use the <code>PopoverTrigger</code> component for easier
+          setup:
+        </p>
+
+        <PopoverTrigger
+          id="example-popover-simple"
+          anchorId="popover-trigger-simple"
+          isOpen={open}
+        >
+          <Button variant="secondary" onClick={() => setOpen((v) => !v)}>
+            Toggle Popover (Simplified)
+          </Button>
+        </PopoverTrigger>
+
+        <Popover
+          isOpen={open}
+          onClose={() => setOpen(false)}
+          id="example-popover-simple"
+          placement={placement}
+          anchorId="popover-trigger-simple"
+        >
+          <div style={{ padding: "12px" }}>
+            <strong>Simplified Popover</strong>
+            <br />
+            This uses PopoverTrigger for automatic anchor-name and ARIA setup.
+          </div>
+        </Popover>
       </div>
     </div>
   );
