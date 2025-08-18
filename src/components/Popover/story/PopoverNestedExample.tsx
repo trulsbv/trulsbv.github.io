@@ -1,107 +1,25 @@
-import { useRef, useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "../../Button/Button";
-import { Popover } from "../Popover";
+import { PopoverTrigger } from "../Popover";
 
 export const PopoverNestedExample = () => {
   const [outerOpen, setOuterOpen] = useState(false);
   const [innerOpen, setInnerOpen] = useState(false);
-  const outerAnchorRef = useRef<HTMLButtonElement>(null);
-  const innerAnchorRef = useRef<HTMLButtonElement>(null);
-
-  // Set anchor-name on the button elements
-  useEffect(() => {
-    if (outerAnchorRef.current) {
-      outerAnchorRef.current.style.setProperty(
-        "anchor-name",
-        "--outer-trigger"
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    if (innerAnchorRef.current) {
-      innerAnchorRef.current.style.setProperty(
-        "anchor-name",
-        "--inner-trigger"
-      );
-    }
-  }, []);
+  const [standaloneOpen, setStandaloneOpen] = useState(false);
 
   return (
     <div style={{ padding: 20 }}>
       <h2>Nested Popovers with Anchor Positioning</h2>
-      <Button
-        ref={outerAnchorRef}
-        variant="primary"
-        onClick={() => setOuterOpen((v) => !v)}
-        aria-haspopup="dialog"
-        aria-expanded={outerOpen}
-        popoverTarget="outer-popover"
-      >
-        Toggle Outer Popover
-      </Button>
 
-      <Popover
-        isOpen={outerOpen}
-        onClose={() => {
-          setOuterOpen(false);
-          setInnerOpen(false);
-        }}
-        id="outer-popover"
-        placement="bottom"
-        anchorId="outer-trigger"
-      >
-        <div
-          style={{
-            background: "white",
-            border: "1px solid #e5e7eb",
-            padding: 12,
-            borderRadius: 8,
-            boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
-            minWidth: 260,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 8,
-            }}
-          >
-            <strong>Outer popover</strong>
-            <button
-              onClick={() => setOuterOpen(false)}
-              aria-label="Close"
-              style={{
-                border: "none",
-                background: "transparent",
-                cursor: "pointer",
-              }}
-            >
-              ×
-            </button>
-          </div>
-          <p style={{ marginTop: 0 }}>Open another popover from here:</p>
-          <Button
-            ref={innerAnchorRef}
-            variant="secondary"
-            onClick={() => setInnerOpen((v) => !v)}
-            aria-haspopup="dialog"
-            aria-expanded={innerOpen}
-            popoverTarget="inner-popover"
-          >
-            Toggle Inner Popover
-          </Button>
-
-          {/* Render the inner popover inside the outer popover's content */}
-          <Popover
-            isOpen={innerOpen}
-            onClose={() => setInnerOpen(false)}
-            id="inner-popover"
-            placement="right"
-            anchorId="inner-trigger"
-          >
+      {/* Standalone popover for comparison */}
+      <div style={{ marginBottom: 20 }}>
+        <h3>Standalone Popover (for comparison)</h3>
+        <PopoverTrigger
+          isOpen={standaloneOpen}
+          onClose={() => setStandaloneOpen(false)}
+          id="standalone-popover"
+          placement="right"
+          content={
             <div
               style={{
                 background: "white",
@@ -112,19 +30,105 @@ export const PopoverNestedExample = () => {
                 minWidth: 200,
               }}
             >
-              <strong>Inner popover</strong>
+              <strong>Standalone popover</strong>
               <div style={{ marginTop: 8, color: "#374151" }}>
-                Content inside the inner popover.
-                <br />
-                <small>
-                  Positioned to the right of the inner trigger button.
-                </small>
+                This should position correctly to the right.
               </div>
-              <button onClick={() => setInnerOpen(false)}>Close</button>
+              <button onClick={() => setStandaloneOpen(false)}>Close</button>
             </div>
-          </Popover>
-        </div>
-      </Popover>
+          }
+        >
+          <Button
+            variant="secondary"
+            onClick={() => setStandaloneOpen((v) => !v)}
+          >
+            Toggle Standalone Popover
+          </Button>
+        </PopoverTrigger>
+      </div>
+
+      <PopoverTrigger
+        isOpen={outerOpen}
+        onClose={() => {
+          setOuterOpen(false);
+          setInnerOpen(false);
+        }}
+        id="outer-popover"
+        placement="bottom"
+        content={
+          <div
+            style={{
+              background: "white",
+              border: "1px solid #e5e7eb",
+              padding: 12,
+              borderRadius: 8,
+              boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
+              minWidth: 260,
+              position: "static",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 8,
+              }}
+            >
+              <strong>Outer popover</strong>
+              <button
+                onClick={() => setOuterOpen(false)}
+                aria-label="Close"
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  cursor: "pointer",
+                }}
+              >
+                ×
+              </button>
+            </div>
+            <p style={{ marginTop: 0 }}>Open another popover from here:</p>
+
+            <PopoverTrigger
+              isOpen={innerOpen}
+              onClose={() => setInnerOpen(false)}
+              id="inner-popover"
+              placement="right"
+              content={
+                <div
+                  style={{
+                    background: "white",
+                    border: "1px solid #e5e7eb",
+                    padding: 12,
+                    borderRadius: 8,
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.18)",
+                    minWidth: 200,
+                  }}
+                >
+                  <strong>Inner popover</strong>
+                  <div style={{ marginTop: 8, color: "#374151" }}>
+                    Content inside the inner popover.
+                    <br />
+                    <small>
+                      Positioned to the right of the inner trigger button.
+                    </small>
+                  </div>
+                  <button onClick={() => setInnerOpen(false)}>Close</button>
+                </div>
+              }
+            >
+              <Button variant="primary" onClick={() => setInnerOpen((v) => !v)}>
+                Toggle Inner Popover
+              </Button>
+            </PopoverTrigger>
+          </div>
+        }
+      >
+        <Button variant="primary" onClick={() => setOuterOpen((v) => !v)}>
+          Toggle Outer Popover
+        </Button>
+      </PopoverTrigger>
     </div>
   );
 };

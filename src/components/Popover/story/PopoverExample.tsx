@@ -19,8 +19,10 @@ export const PopoverExample = () => {
 
       <select
         value={placement}
-        onChange={(e) =>
-          setPlacement(e.target.value as "top" | "bottom" | "left" | "right")
+        onChange={(event) =>
+          setPlacement(
+            event.target.value as "top" | "bottom" | "left" | "right"
+          )
         }
       >
         <option value="top">Top</option>
@@ -30,16 +32,16 @@ export const PopoverExample = () => {
       </select>
 
       <div style={{ marginTop: 32 }}>
-        <h3>Improved Popover2 Usage</h3>
+        <h3>Improved PopoverTrigger Usage</h3>
         <p style={{ marginBottom: 16 }}>
-          The improved Popover2 component automatically handles all trigger
-          properties:
+          The improved PopoverTrigger component automatically handles all
+          trigger properties:
         </p>
         <PopoverTrigger
           isOpen={open}
           onClose={() => setOpen(false)}
           placement={placement}
-          id="example-popover2"
+          id="example-popover-trigger"
           content={
             <div style={{ padding: "12px" }}>
               <div
@@ -50,7 +52,7 @@ export const PopoverExample = () => {
                   marginBottom: 8,
                 }}
               >
-                <strong>Improved Popover2</strong>
+                <strong>Improved PopoverTrigger</strong>
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close popover"
@@ -64,7 +66,7 @@ export const PopoverExample = () => {
                 </button>
               </div>
               <div style={{ color: "#374151", lineHeight: 1.5 }}>
-                This uses the improved Popover2 component with:
+                This uses the improved PopoverTrigger component with:
                 <br />
                 • Automatic ARIA attributes
                 <br />
@@ -75,9 +77,9 @@ export const PopoverExample = () => {
 
               <select
                 value={placement}
-                onChange={(e) =>
+                onChange={(event) =>
                   setPlacement(
-                    e.target.value as "top" | "bottom" | "left" | "right"
+                    event.target.value as "top" | "bottom" | "left" | "right"
                   )
                 }
               >
@@ -90,7 +92,7 @@ export const PopoverExample = () => {
           }
         >
           <Button variant="primary" onClick={() => setOpen((v) => !v)}>
-            Toggle Popover2 (Improved)
+            Toggle PopoverTrigger (Improved)
           </Button>
         </PopoverTrigger>
       </div>
