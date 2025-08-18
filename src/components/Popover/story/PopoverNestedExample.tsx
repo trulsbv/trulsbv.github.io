@@ -23,7 +23,10 @@ export const PopoverNestedExample = () => {
 
       <Popover
         isOpen={outerOpen}
-        onClose={() => { setOuterOpen(false); setInnerOpen(false); }}
+        onClose={() => {
+          setOuterOpen(false);
+          setInnerOpen(false);
+        }}
         anchorRef={outerAnchorRef as any}
         placement="bottom"
         offset={10}
@@ -38,9 +41,24 @@ export const PopoverNestedExample = () => {
             minWidth: 260,
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 8,
+            }}
+          >
             <strong>Outer popover</strong>
-            <button onClick={() => setOuterOpen(false)} aria-label="Close" style={{ border: "none", background: "transparent", cursor: "pointer" }}>
+            <button
+              onClick={() => setOuterOpen(false)}
+              aria-label="Close"
+              style={{
+                border: "none",
+                background: "transparent",
+                cursor: "pointer",
+              }}
+            >
               ×
             </button>
           </div>
@@ -54,30 +72,31 @@ export const PopoverNestedExample = () => {
           >
             Toggle Inner Popover
           </Button>
-        </div>
-      </Popover>
 
-      <Popover
-        isOpen={innerOpen}
-        onClose={() => setInnerOpen(false)}
-        anchorRef={innerAnchorRef as any}
-        placement="right"
-        offset={8}
-      >
-        <div
-          style={{
-            background: "white",
-            border: "1px solid #e5e7eb",
-            padding: 12,
-            borderRadius: 8,
-            boxShadow: "0 10px 25px rgba(0,0,0,0.18)",
-            minWidth: 200,
-          }}
-        >
-          <strong>Inner popover</strong>
-          <div style={{ marginTop: 8, color: "#374151" }}>
-            Content inside the inner popover.
-          </div>
+          {/* Render the inner popover inside the outer popover's content */}
+          <Popover
+            isOpen={innerOpen}
+            onClose={() => setInnerOpen(false)}
+            anchorRef={innerAnchorRef as any}
+            placement="right"
+            offset={8}
+          >
+            <div
+              style={{
+                background: "white",
+                border: "1px solid #e5e7eb",
+                padding: 12,
+                borderRadius: 8,
+                boxShadow: "0 10px 25px rgba(0,0,0,0.18)",
+                minWidth: 200,
+              }}
+            >
+              <strong>Inner popover</strong>
+              <div style={{ marginTop: 8, color: "#374151" }}>
+                Content inside the inner popover.
+              </div>
+            </div>
+          </Popover>
         </div>
       </Popover>
     </div>

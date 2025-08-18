@@ -7,7 +7,8 @@ export const PopoverExample = () => {
   const [placement, setPlacement] = useState<
     "top" | "bottom" | "left" | "right"
   >("bottom");
-  const anchorRef = useRef<HTMLButtonElement>(null);
+
+  console.log(`120655 TBV`, open);
 
   return (
     <div style={{ padding: 20 }}>
@@ -39,12 +40,12 @@ export const PopoverExample = () => {
       </div>
 
       <Button
-        ref={anchorRef as any}
         variant="primary"
         onClick={() => setOpen((v) => !v)}
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        aria-controls="example-popover"
+        // aria-haspopup="dialog"
+        // aria-expanded={open}
+        // aria-controls="example-popover"
+        popoverTarget="example-popover"
       >
         Toggle Popover
       </Button>
@@ -52,22 +53,9 @@ export const PopoverExample = () => {
       <Popover
         isOpen={open}
         onClose={() => setOpen(false)}
-        anchorRef={anchorRef as any}
-        placement={placement}
-        offset={10}
-        role="dialog"
+        id="example-popover"
       >
-        <div
-          id="example-popover"
-          style={{
-            background: "white",
-            border: "1px solid #e5e7eb",
-            padding: 12,
-            borderRadius: 8,
-            boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
-            minWidth: 220,
-          }}
-        >
+        <div>
           <div
             style={{
               display: "flex",
