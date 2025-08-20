@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { Button } from "../../components/Button/Button";
-import { Modal } from "../../components/Modal/Modal";
-import { PopoverTrigger } from "../../components/Popover/Popover";
+import { Button } from "../../publicComponents/Button/Button";
+import { Modal } from "../../publicComponents/Modal/Modal";
+import { PopoverTrigger } from "../../publicComponents/Popover/Popover";
 
 export const AdvancedExamplesPage = () => {
   // Modal contains Popover

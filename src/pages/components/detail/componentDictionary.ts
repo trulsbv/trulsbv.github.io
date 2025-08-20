@@ -2,7 +2,7 @@
 // This approach uses Vite's import.meta.glob to dynamically load component files
 
 // Import all component files as raw text using Vite's glob import
-const componentModules = import.meta.glob("../../../components/*/*.tsx", {
+const componentModules = import.meta.glob("../../../publicComponents/*/*.tsx", {
   as: "raw",
   eager: true,
 });
@@ -12,7 +12,7 @@ export const componentDictionary: { [key: string]: string } = {};
 
 // Process each imported module
 Object.entries(componentModules).forEach(([filePath, content]) => {
-  // Extract component name from path (e.g., "components/Button/Button.tsx" -> "Button")
+  // Extract component name from path (e.g., "publicComponents/Button/Button.tsx" -> "Button")
   const pathParts = filePath.split("/");
   const componentFolder = pathParts[pathParts.length - 2]; // Get folder name
   const filename = pathParts[pathParts.length - 1]?.replace(".tsx", "");
@@ -23,7 +23,7 @@ Object.entries(componentModules).forEach(([filePath, content]) => {
     typeof content === "string" &&
     !filePath.includes("/story/")
   ) {
-    // Use the folder name as the key (e.g., "Button" for "components/Button/Button.tsx")
+    // Use the folder name as the key (e.g., "Button" for "publicComponents/Button/Button.tsx")
     componentDictionary[componentFolder] = content;
   }
 });

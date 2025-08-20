@@ -6,7 +6,7 @@ import type { ComponentType } from "react";
 type ExampleEntry = { title: string; Component: ComponentType };
 
 // Import all story modules for all components
-const storyModules = import.meta.glob("../../../components/*/story/*.tsx", {
+const storyModules = import.meta.glob("../../../publicComponents/*/story/*.tsx", {
   eager: true,
 });
 
@@ -21,9 +21,9 @@ const toTitleCase = (str: string) =>
     .trim();
 
 Object.entries(storyModules).forEach(([filePath, module]) => {
-  // Extract component folder name from path: components/<Folder>/story/<File>.tsx
+  // Extract component folder name from path: publicComponents/<Folder>/story/<File>.tsx
   const parts = filePath.split("/");
-  const folderIndex = parts.findIndex((p) => p === "components");
+  const folderIndex = parts.findIndex((p) => p === "publicComponents");
   const componentFolder = parts[folderIndex + 1];
   const filename = parts[parts.length - 1]?.replace(".tsx", "");
 

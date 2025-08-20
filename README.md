@@ -27,7 +27,7 @@ npm run dev
 
 - Colors and design tokens live in `src/theme/tokens.ts` and are injected as CSS vars at runtime via `injectCssVars`.
 - Global styles: `src/index.css`
-- Main layout: `src/components/BaseLayout.tsx`
+- Main layout: `src/publicComponents/BaseLayout.tsx`
 
 ## GitHub Pages Routing
 
