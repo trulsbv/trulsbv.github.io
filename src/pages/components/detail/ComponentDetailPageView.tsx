@@ -3,7 +3,7 @@ import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
 import "prismjs/themes/prism.css";
 import { semantic } from "../../../theme/tokens";
-import { BrowserCompatTable } from "../../../internalComponents/BrowserCompatTable";
+import { BrowserCompatTable } from "../../../internalComponents/BrowserCompatTable/BrowserCompatTable";
 
 export type ComponentDetailPageViewProps = {
   name: string;
