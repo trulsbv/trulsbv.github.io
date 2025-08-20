@@ -3,6 +3,7 @@ import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
 import "prismjs/themes/prism.css";
 import { semantic } from "../../../theme/tokens";
+import { BrowserCompatTable } from "../../../components/BrowserCompatTable";
 
 export type ComponentDetailPageViewProps = {
   name: string;
@@ -36,7 +37,13 @@ const CodeDisplay = ({
   };
 
   return (
-    <div className="code-display" style={{ background: semantic.code.containerBackground, border: `1px solid ${semantic.code.border}` }}>
+    <div
+      className="code-display"
+      style={{
+        background: semantic.code.containerBackground,
+        border: `1px solid ${semantic.code.border}`,
+      }}
+    >
       <div className="code-header">
         <span className="code-title">Component Code</span>
         <div>
@@ -62,7 +69,10 @@ const CodeDisplay = ({
         <pre
           id="component-code-content"
           className="code-content"
-          style={{ background: semantic.code.containerBackground, color: semantic.code.text }}
+          style={{
+            background: semantic.code.containerBackground,
+            color: semantic.code.text,
+          }}
         >
           <code ref={codeRef} className="language-typescript">
             {code.content}
@@ -79,6 +89,7 @@ export const ComponentDetailPageView = (
   <>
     <h1>{props.name}</h1>
     {props.children}
+    {props.name === "Popover" && <BrowserCompatTable />}
     <CodeDisplay code={props.code} />
   </>
 );

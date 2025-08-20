@@ -20,6 +20,7 @@
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
+    "@mdn/browser-compat-data": "^6.1.4",
     "@types/prismjs": "^1.26.5",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.34",

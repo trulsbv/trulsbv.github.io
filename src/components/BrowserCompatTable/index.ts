@@ -1,0 +1,1 @@
+export { BrowserCompatTable } from "./BrowserCompatTable";
