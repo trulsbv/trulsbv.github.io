@@ -1,13 +1,11 @@
 import { useRef, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { Modal } from "../../components/Modal/Modal";
-import { Popover, PopoverTrigger } from "../../components/Popover/Popover";
-import { CenteredContainer } from "../../components/CenteredContainer";
+import { PopoverTrigger } from "../../components/Popover/Popover";
 
 export const AdvancedExamplesPage = () => {
   // Modal contains Popover
   const [modalOpen, setModalOpen] = useState(false);
-  const modalPopoverAnchorRef = useRef<HTMLButtonElement>(null);
   const [modalPopoverOpen, setModalPopoverOpen] = useState(false);
 
   // Popover contains Modal
@@ -31,72 +29,73 @@ export const AdvancedExamplesPage = () => {
             setModalOpen(false);
             setModalPopoverOpen(false);
           }}
+          style={{
+            alignSelf: "center",
+            justifySelf: "center",
+          }}
         >
-          <CenteredContainer>
+          <div
+            style={{
+              background: "white",
+              padding: 24,
+              borderRadius: 8,
+              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+              minWidth: 420,
+            }}
+          >
+            <h4 style={{ marginTop: 0 }}>Modal with internal popover</h4>
+            <p style={{ marginBottom: 12 }}>
+              The popover is positioned relative to the button inside the modal.
+            </p>
+            <PopoverTrigger
+              isOpen={modalPopoverOpen}
+              placement="right"
+              onClose={() => setModalPopoverOpen(false)}
+              id="inner-modal-popover"
+              content={
+                <div
+                  style={{
+                    background: "white",
+                    border: "1px solid #e5e7eb",
+                    padding: 12,
+                    borderRadius: 8,
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
+                    minWidth: 220,
+                  }}
+                >
+                  <strong>Popover inside modal</strong>
+                  <div style={{ marginTop: 8 }}>
+                    This popover is anchored to a button within the modal.
+                  </div>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setModalPopoverOpen(false)}
+                  >
+                    Close
+                  </Button>
+                </div>
+              }
+            >
+              <Button
+                variant="secondary"
+                onClick={() => setModalPopoverOpen(true)}
+              >
+                Toggle Popover in Modal
+              </Button>
+            </PopoverTrigger>
             <div
               style={{
-                background: "white",
-                padding: 24,
-                borderRadius: 8,
-                boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-                minWidth: 420,
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: 8,
+                marginTop: 16,
               }}
             >
-              <h4 style={{ marginTop: 0 }}>Modal with internal popover</h4>
-              <p style={{ marginBottom: 12 }}>
-                The popover is positioned relative to the button inside the
-                modal.
-              </p>
-              <PopoverTrigger
-                isOpen={modalPopoverOpen}
-                placement="right"
-                onClose={() => setModalPopoverOpen(false)}
-                id="inner-modal-popover"
-                content={
-                  <div
-                    style={{
-                      background: "white",
-                      border: "1px solid #e5e7eb",
-                      padding: 12,
-                      borderRadius: 8,
-                      boxShadow: "0 10px 25px rgba(0,0,0,0.12)",
-                      minWidth: 220,
-                    }}
-                  >
-                    <strong>Popover inside modal</strong>
-                    <div style={{ marginTop: 8 }}>
-                      This popover is anchored to a button within the modal.
-                    </div>
-                    <Button
-                      variant="secondary"
-                      onClick={() => setModalPopoverOpen(false)}
-                    >
-                      Close
-                    </Button>
-                  </div>
-                }
-              >
-                <Button
-                  variant="secondary"
-                  onClick={() => setModalPopoverOpen(true)}
-                >
-                  Toggle Popover in Modal
-                </Button>
-              </PopoverTrigger>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  gap: 8,
-                  marginTop: 16,
-                }}
-              >
-                <Button variant="secondary" onClick={() => setModalOpen(false)}>
-                  Close
-                </Button>
-              </div>
+              <Button variant="secondary" onClick={() => setModalOpen(false)}>
+                Close
+              </Button>
             </div>
-          </CenteredContainer>
+          </div>
         </Modal>
       </section>
 
@@ -166,36 +165,41 @@ export const AdvancedExamplesPage = () => {
             Toggle Popover
           </Button>
         </PopoverTrigger>
-        <Modal isOpen={innerModalOpen} onClose={() => setInnerModalOpen(false)}>
-          <CenteredContainer>
+        <Modal
+          isOpen={innerModalOpen}
+          onClose={() => setInnerModalOpen(false)}
+          style={{
+            alignSelf: "center",
+            justifySelf: "center",
+          }}
+        >
+          <div
+            style={{
+              background: "white",
+              padding: 24,
+              borderRadius: 8,
+              boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+              minWidth: 340,
+            }}
+          >
+            <h4 style={{ marginTop: 0 }}>Modal opened from popover</h4>
+            <p>This modal was triggered by a button inside the popover.</p>
             <div
               style={{
-                background: "white",
-                padding: 24,
-                borderRadius: 8,
-                boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
-                minWidth: 340,
+                display: "flex",
+                justifyContent: "flex-end",
+                gap: 8,
+                marginTop: 16,
               }}
             >
-              <h4 style={{ marginTop: 0 }}>Modal opened from popover</h4>
-              <p>This modal was triggered by a button inside the popover.</p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  gap: 8,
-                  marginTop: 16,
-                }}
+              <Button
+                variant="primary"
+                onClick={() => setInnerModalOpen(false)}
               >
-                <Button
-                  variant="primary"
-                  onClick={() => setInnerModalOpen(false)}
-                >
-                  Close
-                </Button>
-              </div>
+                Close
+              </Button>
             </div>
-          </CenteredContainer>
+          </div>
         </Modal>
       </section>
     </div>

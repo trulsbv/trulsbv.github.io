@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "../../Button/Button";
 import { Modal } from "../Modal";
-import { CenteredContainer } from "../../CenteredContainer";
 
 export const ModalNestedExample = () => {
   const [isOuterOpen, setIsOuterOpen] = useState(false);
@@ -14,55 +13,68 @@ export const ModalNestedExample = () => {
         Open Outer Modal
       </Button>
 
-      <Modal isOpen={isOuterOpen} onClose={() => { setIsOuterOpen(false); setIsInnerOpen(false); }}>
-        <CenteredContainer>
-          <div
-            style={{
-              background: "white",
-              padding: 24,
-              borderRadius: 8,
-              boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-              minWidth: 360,
-            }}
-          >
-            <h3 style={{ marginTop: 0 }}>Outer modal</h3>
-            <p style={{ marginBottom: 16 }}>
-              This is the outer modal. You can open another modal on top of this.
-            </p>
-            <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-              <Button variant="secondary" onClick={() => setIsOuterOpen(false)}>
-                Close outer
-              </Button>
-              <Button variant="primary" onClick={() => setIsInnerOpen(true)}>
-                Open inner modal
-              </Button>
-            </div>
+      <Modal
+        isOpen={isOuterOpen}
+        onClose={() => {
+          setIsOuterOpen(false);
+          setIsInnerOpen(false);
+        }}
+        style={{
+          alignSelf: "center",
+          justifySelf: "center",
+        }}
+      >
+        <div
+          style={{
+            background: "white",
+            padding: 24,
+            borderRadius: 8,
+            boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+            minWidth: 360,
+          }}
+        >
+          <h3 style={{ marginTop: 0 }}>Outer modal</h3>
+          <p style={{ marginBottom: 16 }}>
+            This is the outer modal. You can open another modal on top of this.
+          </p>
+          <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+            <Button variant="secondary" onClick={() => setIsOuterOpen(false)}>
+              Close outer
+            </Button>
+            <Button variant="primary" onClick={() => setIsInnerOpen(true)}>
+              Open inner modal
+            </Button>
           </div>
-        </CenteredContainer>
+        </div>
       </Modal>
 
-      <Modal isOpen={isInnerOpen} onClose={() => setIsInnerOpen(false)}>
-        <CenteredContainer>
-          <div
-            style={{
-              background: "white",
-              padding: 24,
-              borderRadius: 8,
-              boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
-              minWidth: 320,
-            }}
-          >
-            <h3 style={{ marginTop: 0 }}>Inner modal</h3>
-            <p style={{ marginBottom: 16 }}>
-              This inner modal is opened from the outer modal.
-            </p>
-            <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-              <Button variant="primary" onClick={() => setIsInnerOpen(false)}>
-                Close inner
-              </Button>
-            </div>
+      <Modal
+        isOpen={isInnerOpen}
+        onClose={() => setIsInnerOpen(false)}
+        style={{
+          alignSelf: "center",
+          justifySelf: "center",
+        }}
+      >
+        <div
+          style={{
+            background: "white",
+            padding: 24,
+            borderRadius: 8,
+            boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
+            minWidth: 320,
+          }}
+        >
+          <h3 style={{ marginTop: 0 }}>Inner modal</h3>
+          <p style={{ marginBottom: 16 }}>
+            This inner modal is opened from the outer modal.
+          </p>
+          <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+            <Button variant="primary" onClick={() => setIsInnerOpen(false)}>
+              Close inner
+            </Button>
           </div>
-        </CenteredContainer>
+        </div>
       </Modal>
     </div>
   );

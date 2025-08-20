@@ -155,6 +155,7 @@ const StyledPopover = styled.div<{
   anchorId: string;
 }>`
   inset: auto;
+  position: absolute;
 
   /* Anchor positioning based on placement */
   ${({ placement, anchorId }) => {
@@ -182,6 +183,7 @@ const StyledPopover = styled.div<{
       case "right":
         return `
           position-anchor: ${anchorName};
+          anchor-name: ${anchorName};
           left: anchor(right);
           align-self: anchor-center;
         `;
@@ -192,12 +194,4 @@ const StyledPopover = styled.div<{
         `;
     }
   }}
-
-  /* Fallback positioning for browsers that don't support anchor positioning */
-  @supports not (anchor-name: --test) {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 `;
