@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../../Button/Button";
+import { Button } from "../../../internalComponents/Button/Button";
 import { Modal } from "../Modal";
 
 export const ModalExample = () => {

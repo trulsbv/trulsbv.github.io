@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Hero from "../../publicComponents/Hero";
-import { ComponentsGrid } from "../../publicComponents/ComponentsGrid";
+import Hero from "../../internalComponents/Hero";
+import { ComponentsGrid } from "../../internalComponents/ComponentsGrid";
 
 const PageContainer = styled.div`
   max-width: 1200px;

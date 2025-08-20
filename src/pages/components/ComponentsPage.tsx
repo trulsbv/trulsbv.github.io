@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { ComponentsIndex } from "../../publicComponents/ComponentsIndex";
+import { ComponentsIndex } from "../../internalComponents/ComponentsIndex";
 
 const PageContainer = styled.div`
   max-width: 1200px;

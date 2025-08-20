@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { BaseLayout } from "../publicComponents/BaseLayout";
+import { BaseLayout } from "../internalComponents/BaseLayout";
 import { ROUTES } from "./types";
 import { routeSubtrees } from "./routeSubtrees";
 

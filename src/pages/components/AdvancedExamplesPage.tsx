@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Button } from "../../publicComponents/Button/Button";
+import { Button } from "../../internalComponents/Button/Button";
 import { Modal } from "../../publicComponents/Modal/Modal";
 import { PopoverTrigger } from "../../publicComponents/Popover/Popover";
 

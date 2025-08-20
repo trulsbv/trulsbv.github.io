@@ -1,4 +1,4 @@
-import Hero from "../publicComponents/Hero";
+import Hero from "../internalComponents/Hero";
 import { storybookMeta } from "./utils";
 
 export const Basic = () => <Hero />;
