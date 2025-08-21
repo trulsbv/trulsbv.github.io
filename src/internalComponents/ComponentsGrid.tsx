@@ -35,12 +35,6 @@ const components = [
       "A lightweight popover using the native HTML Popover API with light-dismiss, ESC support, and anchor positioning.",
     componentName: "Popover",
   },
-  {
-    name: "Button",
-    description:
-      "A styled button component with primary and secondary variants, hover effects, and focus states for accessibility.",
-    componentName: "Button",
-  },
 ];
 
 export const ComponentsGrid = () => {
