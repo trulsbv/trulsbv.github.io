@@ -165,30 +165,36 @@ const StyledPopover = styled.div<{
       case "top":
         return `
           position-anchor: ${anchorName};
+          anchor-name: ${anchorName};
           bottom: anchor(top);
           justify-self: anchor-center;
         `;
       case "bottom":
         return `
           position-anchor: ${anchorName};
+          anchor-name: ${anchorName};
           top: anchor(bottom);
           justify-self: anchor-center;
         `;
       case "left":
         return `
           position-anchor: ${anchorName};
+          anchor-name: ${anchorName};
           right: anchor(left);
-          align-self: anchor-center;
+          top: anchor(center);
+          transform: translateY(-50%);
         `;
       case "right":
         return `
           position-anchor: ${anchorName};
           anchor-name: ${anchorName};
           left: anchor(right);
-          align-self: anchor-center;
+          top: anchor(center);
+          transform: translateY(-50%);
         `;
       default:
         return `
+          anchor-name: ${anchorName};
           position-anchor: ${anchorName};
           justify-self: anchor-center;
         `;
