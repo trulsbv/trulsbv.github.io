@@ -109,8 +109,11 @@ const FeatureName = styled.td`
 //   console.log(`FOUND AT: ${foundPath}`);
 // }
 // Get browser compatibility data for popover features
-const getPopoverCompatData = () => {
-  const features = [
+const allFeatures: Record<
+  string,
+  { name: string; data: any; description: string }[]
+> = {
+  Popover: [
     {
       name: "popover",
       data: bcd.html.global_attributes.popover,
@@ -136,9 +139,29 @@ const getPopoverCompatData = () => {
       data: bcd.css.properties["anchor-name"],
       description: "CSS anchor-name property",
     },
-  ];
-
-  return features;
+  ],
+  Modal: [
+    {
+      name: "dialog",
+      data: bcd.html.elements.dialog,
+      description: "HTML dialog element",
+    },
+    {
+      name: "showModal()",
+      data: bcd.api.HTMLDialogElement.showModal,
+      description: "HTMLDialogElement.showModal() method",
+    },
+    {
+      name: "close()",
+      data: bcd.api.HTMLDialogElement.close,
+      description: "HTMLDialogElement.close() method",
+    },
+    {
+      name: "close event",
+      data: bcd.api.HTMLDialogElement.close_event,
+      description: "HTMLDialogElement close event",
+    },
+  ],
 };
 
 type SupportStatusReturn =
@@ -195,15 +218,19 @@ const getMajorBrowsers = () => {
     .filter((browser) => browser !== null);
 };
 
-export const BrowserCompatTable = () => {
-  const features = getPopoverCompatData();
+export const BrowserCompatTable = ({ component }: { component: string }) => {
   const browsers = getMajorBrowsers();
+  const features = allFeatures[component];
+
+  if (!features) {
+    return null;
+  }
 
   return (
     <div>
       <Title>Browser compatibility</Title>
       <Description>
-        Browser support for popover features used in this component.
+        Browser support for features used in this component.
       </Description>
 
       <TableContainer>
@@ -227,6 +254,7 @@ export const BrowserCompatTable = () => {
                     feature.data?.__compat?.support,
                     browser.key
                   );
+
                   return (
                     <Td
                       key={browser.key}

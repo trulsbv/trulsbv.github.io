@@ -89,7 +89,7 @@ export const ComponentDetailPageView = (
   <>
     <h1>{props.name}</h1>
     {props.children}
-    {props.name === "Popover" && <BrowserCompatTable />}
+    <BrowserCompatTable component={props.name} />
     <CodeDisplay code={props.code} />
   </>
 );
