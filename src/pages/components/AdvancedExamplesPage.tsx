@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "../../internalComponents/Button/Button";
 import { Modal } from "../../publicComponents/Modal/Modal";
 import { PopoverTrigger } from "../../publicComponents/Popover/Popover";
@@ -9,7 +9,6 @@ export const AdvancedExamplesPage = () => {
   const [modalPopoverOpen, setModalPopoverOpen] = useState(false);
 
   // Popover contains Modal
-  const popoverAnchorRef = useRef<HTMLButtonElement>(null);
   const [outerPopoverOpen, setOuterPopoverOpen] = useState(false);
   const [innerModalOpen, setInnerModalOpen] = useState(false);
 
@@ -76,12 +75,15 @@ export const AdvancedExamplesPage = () => {
                 </div>
               }
             >
-              <Button
-                variant="secondary"
-                onClick={() => setModalPopoverOpen(true)}
-              >
-                Toggle Popover in Modal
-              </Button>
+              {(props) => (
+                <Button
+                  variant="secondary"
+                  onClick={() => setModalPopoverOpen(true)}
+                  ref={props.ref}
+                >
+                  Toggle Popover in Modal
+                </Button>
+              )}
             </PopoverTrigger>
             <div
               style={{
@@ -154,16 +156,15 @@ export const AdvancedExamplesPage = () => {
             </div>
           }
         >
-          <Button
-            ref={popoverAnchorRef as any}
-            variant="primary"
-            onClick={() => setOuterPopoverOpen((v) => !v)}
-            aria-haspopup="dialog"
-            aria-expanded={outerPopoverOpen}
-            popoverTarget="outer-popover"
-          >
-            Toggle Popover
-          </Button>
+          {(props) => (
+            <Button
+              variant="primary"
+              onClick={() => setOuterPopoverOpen((v) => !v)}
+              ref={props.ref}
+            >
+              Toggle Popover
+            </Button>
+          )}
         </PopoverTrigger>
         <Modal
           isOpen={innerModalOpen}

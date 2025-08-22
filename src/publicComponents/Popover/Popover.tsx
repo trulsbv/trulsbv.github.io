@@ -8,17 +8,25 @@ export type PopoverTriggerProps = {
   id: string;
 };
 
+export type PopoverTriggerRenderProps = {
+  ref: React.Ref<HTMLButtonElement | null>;
+  popoverTarget: string;
+  "aria-haspopup": React.AriaAttributes["aria-haspopup"];
+  "aria-expanded": React.AriaAttributes["aria-expanded"];
+  "aria-controls": React.AriaAttributes["aria-controls"];
+};
+
 export const PopoverTrigger = (
   props: PopoverTriggerProps & {
     content: React.ReactElement;
-    children: React.ReactElement;
+    children: (props: PopoverTriggerRenderProps) => React.ReactElement;
   }
 ) => {
   const anchorId = `anchor-${props.id}`;
   const popoverId = `popover-${props.id}`;
 
   // Add anchor-name to the trigger element
-  const triggerRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (triggerRef.current) {
@@ -27,23 +35,16 @@ export const PopoverTrigger = (
   }, [anchorId]);
 
   // Merge existing props with required popover props
-  const triggerProps = {
-    ref: triggerRef,
-    popoverTarget: popoverId,
-    "aria-haspopup": "dialog" as const,
-    "aria-expanded": props.isOpen,
-    "aria-controls": popoverId,
-  };
-
-  // Merge with existing props from the child element
-  const mergedProps = {
-    ...(props.children.props as Record<string, any>),
-    ...triggerProps,
-  };
 
   return (
     <>
-      {React.cloneElement(props.children, mergedProps)}
+      {props.children({
+        ref: triggerRef,
+        popoverTarget: popoverId,
+        "aria-haspopup": "dialog",
+        "aria-expanded": props.isOpen,
+        "aria-controls": popoverId,
+      })}
       <Popover
         id={popoverId}
         anchorId={anchorId}
@@ -112,12 +113,13 @@ export const Popover = ({
 
   useEffect(() => {
     const popover = popoverRef.current;
+    if (!popover) return;
 
-    if (!popover || isOpen) {
-      return;
+    if (isOpen) {
+      popover.showPopover();
+    } else {
+      popover.hidePopover();
     }
-
-    popover.hidePopover();
   }, [isOpen]);
 
   // Add escape key handling
@@ -141,8 +143,8 @@ export const Popover = ({
       ref={popoverRef}
       popover="manual"
       id={id}
-      placement={placement}
-      anchorId={anchorId}
+      $placement={placement}
+      $anchorId={anchorId}
     >
       {children}
     </StyledPopover>
@@ -151,17 +153,17 @@ export const Popover = ({
 
 // Styled component for the popover with anchor positioning
 const StyledPopover = styled.div<{
-  placement: PopoverPlacement;
-  anchorId: string;
+  $placement: PopoverPlacement;
+  $anchorId: string;
 }>`
   inset: auto;
   position: absolute;
 
   /* Anchor positioning based on placement */
-  ${({ placement, anchorId }) => {
-    const anchorName = `--${anchorId}`;
+  ${({ $placement, $anchorId }) => {
+    const anchorName = `--${$anchorId}`;
 
-    switch (placement) {
+    switch ($placement) {
       case "top":
         return `
           position-anchor: ${anchorName};

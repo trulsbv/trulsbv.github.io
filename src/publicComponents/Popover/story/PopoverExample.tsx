@@ -91,9 +91,15 @@ export const PopoverExample = () => {
             </div>
           }
         >
-          <Button variant="primary" onClick={() => setOpen((v) => !v)}>
-            Toggle PopoverTrigger (Improved)
-          </Button>
+          {(props) => (
+            <Button
+              variant="primary"
+              onClick={() => setOpen((v) => !v)}
+              ref={props.ref}
+            >
+              Toggle PopoverTrigger (Improved)
+            </Button>
+          )}
         </PopoverTrigger>
       </div>
     </div>

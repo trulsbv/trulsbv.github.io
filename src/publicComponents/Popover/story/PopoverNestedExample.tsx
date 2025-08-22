@@ -38,12 +38,15 @@ export const PopoverNestedExample = () => {
             </div>
           }
         >
-          <Button
-            variant="secondary"
-            onClick={() => setStandaloneOpen((v) => !v)}
-          >
-            Toggle Standalone Popover
-          </Button>
+          {(props) => (
+            <Button
+              variant="secondary"
+              onClick={() => setStandaloneOpen((v) => !v)}
+              ref={props.ref}
+            >
+              Toggle Standalone Popover
+            </Button>
+          )}
         </PopoverTrigger>
       </div>
 
@@ -118,16 +121,28 @@ export const PopoverNestedExample = () => {
                 </div>
               }
             >
-              <Button variant="primary" onClick={() => setInnerOpen((v) => !v)}>
-                Toggle Inner Popover
-              </Button>
+              {(props) => (
+                <Button
+                  variant="primary"
+                  onClick={() => setInnerOpen((v) => !v)}
+                  ref={props.ref}
+                >
+                  Toggle Inner Popover
+                </Button>
+              )}
             </PopoverTrigger>
           </div>
         }
       >
-        <Button variant="primary" onClick={() => setOuterOpen((v) => !v)}>
-          Toggle Outer Popover
-        </Button>
+        {(props) => (
+          <Button
+            variant="primary"
+            onClick={() => setOuterOpen((v) => !v)}
+            ref={props.ref}
+          >
+            Toggle Outer Popover
+          </Button>
+        )}
       </PopoverTrigger>
     </div>
   );
