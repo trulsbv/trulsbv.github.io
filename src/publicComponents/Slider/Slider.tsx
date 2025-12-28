@@ -1,9 +1,18 @@
-export type SliderProps = {
-  min: number;
-  max: number;
-  value: number;
-  onChange: (value: number) => void;
-};
+import type { InputHTMLAttributes } from "react";
+import type { CommonInputAttributes } from "../shared/inputTypes";
+
+type RangeSpecificAttributes = Pick<
+  InputHTMLAttributes<HTMLInputElement>,
+  "step" | "list"
+>;
+
+export type SliderProps = CommonInputAttributes &
+  RangeSpecificAttributes & {
+    min: number;
+    max: number;
+    value: number;
+    onChange: (value: number) => void;
+  };
 
 export const Slider = (props: SliderProps) => (
   <input
