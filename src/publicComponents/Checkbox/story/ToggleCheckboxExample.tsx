@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { Checkbox } from "../Checkbox";
 import { useState } from "react";
 import { semantic } from "../../../theme/tokens";
-import Button from "../../../internalComponents/Button/Button";
+import { Button } from "../../../internalComponents/Button/Button";
 
 export const ToggleCheckboxExample = () => {
   const [isChecked, setIsChecked] = useState(false);

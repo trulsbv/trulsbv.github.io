@@ -59,5 +59,3 @@ export const Button = styled.button<{ variant?: "primary" | "secondary" }>`
   ${(props) =>
     props.variant === "primary" ? PrimaryButtonStyle : SecondaryButtonStyle}
 `;
-
-export default Button;
