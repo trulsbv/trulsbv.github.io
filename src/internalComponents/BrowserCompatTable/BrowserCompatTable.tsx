@@ -174,23 +174,6 @@ const allFeatures: Record<
       description: "Labeled values support (tick marks with datalist)",
     },
   ],
-  Checkbox: [
-    {
-      name: 'type="checkbox"',
-      data: bcd.html.elements.input.type_checkbox,
-      description: "HTML input type checkbox",
-    },
-    {
-      name: "appearance",
-      data: bcd.css.properties.appearance,
-      description: "CSS appearance property for custom styling",
-    },
-    {
-      name: ":checked",
-      data: bcd.css.selectors.checked,
-      description: "CSS :checked pseudo-class",
-    },
-  ],
 };
 
 type SupportStatusReturn =
