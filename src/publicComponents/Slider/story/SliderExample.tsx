@@ -2,6 +2,7 @@ import { styled, css } from "styled-components";
 import { Slider } from "../Slider";
 import { useState } from "react";
 import Button from "../../../internalComponents/Button/Button";
+import { semantic } from "../../../theme/tokens";
 
 export const SliderExample = () => {
   const [minValue, setMinValue] = useState(0);
@@ -72,6 +73,7 @@ const SliderControls = (props: SliderControlsProps) => (
 
 const thumbStyles = css`
   appearance: none;
+  position: relative;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -86,6 +88,13 @@ const StylishSlider = styled(Slider)`
   height: 6px;
   border-radius: 3px;
   background-image: linear-gradient(lightblue, lightblue);
+  outline: none;
+
+  &:focus-visible {
+    /* Use box-shadow instead of outline to ensure it renders behind the thumb in all browsers.
+       Firefox doesn't respect stacking context for ::-moz-range-thumb the same way Chrome/Safari do */
+    box-shadow: 0 0 0 2px ${semantic.button.focusOutline};
+  }
 
   /**  Chrome & Safari*/
   &::-webkit-slider-thumb {
