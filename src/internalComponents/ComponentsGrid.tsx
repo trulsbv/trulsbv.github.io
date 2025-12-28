@@ -41,6 +41,12 @@ const components = [
       "A customizable slider component supporting horizontal, vertical, and circular orientations with keyboard accessibility.",
     componentName: "Slider",
   },
+  {
+    name: "Checkbox",
+    description:
+      "A customizable checkbox component using native browser input with custom styling that works across all major browsers.",
+    componentName: "Checkbox",
+  },
 ];
 
 export const ComponentsGrid = () => {
