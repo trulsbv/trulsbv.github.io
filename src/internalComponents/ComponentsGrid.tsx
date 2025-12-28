@@ -35,6 +35,12 @@ const components = [
       "A lightweight popover using the native HTML Popover API with light-dismiss, ESC support, and anchor positioning.",
     componentName: "Popover",
   },
+  {
+    name: "Slider",
+    description:
+      "A customizable slider component supporting horizontal, vertical, and circular orientations with keyboard accessibility.",
+    componentName: "Slider",
+  },
 ];
 
 export const ComponentsGrid = () => {
