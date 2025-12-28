@@ -14,7 +14,6 @@ export const ComponentDetailPage = () => {
         <div style={{ display: "grid", gap: 24 }}>
           {examples.map(({ title, Component }) => (
             <section key={title}>
-              <h2 style={{ marginBottom: 8 }}>{title}</h2>
               <Component />
             </section>
           ))}

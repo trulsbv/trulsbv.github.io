@@ -162,6 +162,18 @@ const allFeatures: Record<
       description: "HTMLDialogElement close event",
     },
   ],
+  Slider: [
+    {
+      name: 'type="range"',
+      data: bcd.html.elements.input.type_range,
+      description: "HTML input type range",
+    },
+    {
+      name: "list attribute",
+      data: bcd.html.elements.input.list,
+      description: "Labeled values support (tick marks with datalist)",
+    },
+  ],
 };
 
 type SupportStatusReturn =
